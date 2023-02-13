@@ -61,7 +61,7 @@ export const Login = (props) => {
                 </ul>
             </nav>
 
-            <h1>This is Login p</h1>
+            <h1>This is Login page</h1>
             
             <form onSubmit={handleSubmit}>
                 <label htmlFor ="UserName">UserName</label>
