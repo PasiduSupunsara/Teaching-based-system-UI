@@ -12,7 +12,7 @@ export const About = () => {
                     <Link to="/">Logout</Link>
                 </ul>
             </nav>
-            <h1>This is about page</h1>
+            <h1 className="Header">This is about page</h1>
         </div>
     )
 }

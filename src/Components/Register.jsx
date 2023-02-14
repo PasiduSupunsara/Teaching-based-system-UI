@@ -2,6 +2,7 @@ import React,{useState} from "react"
 import { useNavigate } from "react-router-dom"
 
 
+
 export const Register = (props) => {
     const [name,setUserName] = useState(null);
     const [firstName,setFirstName] = useState(null);
@@ -49,7 +50,7 @@ export const Register = (props) => {
                 console.log(user);
             }
             else if(response.status===500){
-                setError("Some details are used previously"); 
+                setError("Some details are used previously/Fill all details"); 
                 navigate("/Register");
                 console.log(user);
             }
@@ -63,7 +64,7 @@ export const Register = (props) => {
         }
     return (
         <div className="auth-form-container">
-            <h1>This is Register page</h1>
+            <h1>REGISTRATION PAGE</h1>
             <form className="register-form" onSubmit={handleSubmit}>
                 
                 <label htmlFor ="UserName">User Name</label>
@@ -88,7 +89,7 @@ export const Register = (props) => {
                 <input value = {phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} type = "PhoneNumber" placeholder = "Phone Number" id = "PhoneNumber" name = "PhoneNumber"/>
                 <br/>
                 <label htmlFor = "DateOfBirth">Birthday</label>
-                <input value = {dateOfBirth} onChange={(e) => setDateOfBirth(e.target.value)} type = "DateOfBirth" placeholder = "year/mm/dd" id = "DateOfBirth" name = "DateOfBirth"/>
+                <input value = {dateOfBirth} onChange={(e) => setDateOfBirth(e.target.value)} type = "DateOfBirth" placeholder = "yyyy/mm/dd" id = "DateOfBirth" name = "DateOfBirth"/>
                 <br/>
                 <label htmlFor = "IdNumber">ID Number</label>
                 <input value = {idNumber} onChange={(e) => setIdNumber(e.target.value)} type = "IdNumber" placeholder = "Id Number" id = "IdNumber" name = "IdNumber"/>

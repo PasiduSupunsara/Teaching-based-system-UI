@@ -36,6 +36,7 @@ button {
   font-size: x-large;
   cursor: pointer;
   color: #7439db;
+  margin: 0.5rem 0
 }
 
 .link-btn {
@@ -54,6 +55,11 @@ button {
 
 .View-container{
   padding: 100px;
+  
+}
+.header{
+  font-size: xx-large;
+
 }
 
 

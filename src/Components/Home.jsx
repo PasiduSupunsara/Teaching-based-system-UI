@@ -2,17 +2,21 @@ import { Link } from "react-router-dom";
 
 export const Home = () => {
     return (
-        
-        <div>
-            <nav>
-                <ul>
-                    <Link to="/Register">Register</Link>
-                    <Link to="/Login">Login</Link>
-                    <Link to="/About">About</Link>
-                </ul>
-            </nav>
+        <form>
             
-            <h1>This is Home page</h1>
-        </div>
+        
+        <nav>
+            <ul>
+                <Link to="/Register">Register</Link>
+                <Link to="/Login">Login</Link>
+                <Link to="/About">About</Link>
+            </ul>
+        </nav>
+        <h1 >This is Home page</h1>
+        </form>
+        
+            
+            
+        
     )
 }

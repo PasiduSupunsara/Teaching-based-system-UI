@@ -8,7 +8,7 @@ import { Login } from './Components/Login'
 import { Register} from './Components/Register'
 import { Update} from './Components/Update'
 import { View } from './Components/View'
-import { Home } from './Components/Home';
+
 
 
 
@@ -21,7 +21,7 @@ function App(){
     <div className="App" >
       <BrowserRouter>
       <Routes>
-      <Route path="/" element={<Home/>}/>
+      <Route path="/" element={<Login/>}/>
       <Route path="/About" element={<About/>}/>
       <Route path="/Delete" element={<Delete/>}/>
       <Route path="/GetAllUsers" element={<GetAllUsers/>}/>

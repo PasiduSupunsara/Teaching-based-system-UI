@@ -7,11 +7,12 @@ export const View = (props) => {
     
     return (
         <div className="View-container">
-            <h1>This is user view page</h1><br/>
+            <h1 className="Header">USER PAGE</h1><br/>
             <button onClick={()=>{navigate("/Update")}} type="submit" >Update</button><br/>
             <button onClick={()=>{navigate("/Delete")}} type="submit" >Delete</button><br/>
             <button onClick={()=>{navigate("/GetAllUsers")}} type="submit" >GetAllUsers</button><br/>
             <button onClick={()=>{navigate("/")}} type="submit" >Logout</button>
+            
         </div>
     )
 }

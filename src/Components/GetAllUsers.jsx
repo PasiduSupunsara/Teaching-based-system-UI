@@ -19,7 +19,7 @@ useEffect(()=>{
 
 return (
     <div >
-    <h1>User Details</h1>
+    <h1 className="Header">User Details</h1>
     <ul >
       {user.map((item, index) => (
         <li  key={index}>
