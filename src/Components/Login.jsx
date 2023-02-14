@@ -21,35 +21,15 @@ export const Login = (props) => {
         }).then((response)=>{
 
             console.log("response",response);
+            console.log(response.status);
             if(response.status===200){
                 navigate("/View")
             }
             else{
-               props.loginFailure('Something Wrong!Please Try Again'); 
+               setError("Please try with correct username and password"); 
                navigate("/Login")
             }
-        }).catch((err)=>{
-
-            if(err && err.response){
-            
-            switch(err.response.status){
-                case 401:
-                    setError("Please try again with correct password and user name");
-                    break;
-                default:
-                    setError("Please try again with correct password and user name");
-                    
-
-            }
-
-            }
-            else{
-                setError("Please try again with correct password and user name");
-                
-            
-            }
-        
-    })}
+        })}
     return (
         <>
             <nav>
