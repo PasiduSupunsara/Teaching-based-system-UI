@@ -1,7 +1,5 @@
 import React,{useState} from "react"
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
-
 
 export const Update = (props) => {
     const [id,setUserId] = useState('');
@@ -25,17 +23,8 @@ export const Update = (props) => {
       navigate("/View")
     }
     return (
-        <>
-            <nav>
-                <ul>
-                    <Link to="/Register">Register</Link>
-                    <Link to="/Login">Login</Link>
-                    <Link to="/">Home</Link>
-                    <Link to="/About">About</Link>
-                    <Link to="/">Logout</Link>
-                </ul>
-            </nav>
-            <form onSubmit={handleSubmit}>
+        <div className="Delete-form-container">
+            <form className="delete-form" onSubmit={handleSubmit}>
                 <label htmlFor ="UserId">UserId</label>
                 <input value = {id} onChange={(e) => setUserId(e.target.value)} type= "UserId" placeholder = "Your User Id" id = "UserId" name = "UserId"/>
                 <br/>
@@ -53,7 +42,7 @@ export const Update = (props) => {
                 
                 
             </form>
-            <button onClick={() => navigate('/View')}>View</button>
-        </>
+            <button onClick={() => navigate('/View')}>Back</button>
+        </div>
     )
 }

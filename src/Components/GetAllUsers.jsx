@@ -1,6 +1,5 @@
 import React,{useEffect, useState} from "react"
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 
 export const GetAllUsers = (props) => {
     const [user,setUser] = useState([]);
@@ -19,24 +18,28 @@ useEffect(()=>{
 
 
 return (
-    <>
-    <nav>
-                <ul>
-                    
-                    <Link to="/">Home</Link>
-                    <Link to="/About">About</Link>
-                    <Link to="/">Logout</Link>
-                </ul>
-            </nav>
+    <div >
     <h1>User Details</h1>
-    <ul>
+    <ul >
       {user.map((item, index) => (
-        <li key={index}>Name {" "}:{" "}{item.name} <br/>  Role{" "}:{" "}{item.role}<br/><hr style={{ border: '1px solid black', margin: '20px 0' }} /></li>
+        <li  key={index}>
+        <form  className="All-Details">
+        User Name {" "}:{" "}{item.name} <br/> 
+        First Name{" "}:{" "}{item.firstName  }<br/>
+        Last Name{" "}:{" "}{item.lastName}<br/>
+        ID Number{" "}:{" "}{item.idNumber}<br/>
+        Email{" "}:{" "}{item.email}<br/>
+        Address{" "}:{" "}{item.address}<br/>
+        Role{" "}:{" "}{item.role}<br/>
+        BirthDay{" "}:{" "}{item.dateOfBirth}<br/>
+        Phone Number{" "}:{" "}{item.phoneNumber}<br/>
+        </form>
+        <hr style={{ border: '1px solid black', margin: '20px 0' }} /></li>
         
       ))}
     </ul>
     <button onClick={() => navigate('/View')}>Back</button>
     
-    </>
+    </div>
   )
 }

@@ -1,6 +1,81 @@
 .App {
   text-align: center;
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-image: linear-gradient(79deg, #7439db, #C66FBC 48%, #F7944D);
 }
+
+.auth-form-container, .login-form, .register-form , .delete-form-container,.delete-form,.AllUser-form-container{
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  text-align: left;
+  padding: 0.25rem 0;
+  font-size: large;
+}
+
+
+input {
+  margin: 0.5rem 0;
+  padding: 1rem;
+  border: none;
+  font-size: large;
+  border-radius: 10px;
+}
+
+button {
+  border: none;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  font-size: x-large;
+  cursor: pointer;
+  color: #7439db;
+}
+
+.link-btn {
+  background: none;
+  color: white;
+  text-decoration: underline;
+}
+
+.All-Details{
+  font-size:x-large;
+  padding: 20px;
+  text-align: left;
+  color: black;
+  
+}
+
+.View-container{
+  padding: 100px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .App-logo {
   height: 40vmin;

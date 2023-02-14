@@ -1,6 +1,5 @@
 import React,{useState} from "react"
 import { useNavigate } from "react-router-dom"
-import { Link } from "react-router-dom";
 
 
 export const Register = (props) => {
@@ -63,18 +62,9 @@ export const Register = (props) => {
         })
         }
     return (
-        <>
-            <nav>
-                <ul>
-                    
-                    <Link to="/Login">Login</Link>
-                    <Link to="/">Home</Link>
-                    <Link to="/About">About</Link>
-                    <Link to="/">Logout</Link>
-                </ul>
-            </nav>
+        <div className="auth-form-container">
             <h1>This is Register page</h1>
-            <form onSubmit={handleSubmit}>
+            <form className="register-form" onSubmit={handleSubmit}>
                 
                 <label htmlFor ="UserName">User Name</label>
                 <input value = {name} onChange={(e) => setUserName(e.target.value)} type= "UserName" placeholder = "Your User Name" id = "UserName" name = "UserName"/>
@@ -94,11 +84,11 @@ export const Register = (props) => {
                 <label htmlFor = "Address">Address</label>
                 <input value = {address} onChange={(e) => setAddress(e.target.value)} type = "Address" placeholder = "Address" id = "Address" name = "Address"/>
                 <br/>
-                <label htmlFor = "PhoneNumber">PhoneNumber</label>
+                <label htmlFor = "PhoneNumber">Phone Number</label>
                 <input value = {phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} type = "PhoneNumber" placeholder = "Phone Number" id = "PhoneNumber" name = "PhoneNumber"/>
                 <br/>
-                <label htmlFor = "DateOfBirth">DateOfBirth</label>
-                <input value = {dateOfBirth} onChange={(e) => setDateOfBirth(e.target.value)} type = "DateOfBirth" placeholder = "Date Of Birth" id = "DateOfBirth" name = "DateOfBirth"/>
+                <label htmlFor = "DateOfBirth">Birthday</label>
+                <input value = {dateOfBirth} onChange={(e) => setDateOfBirth(e.target.value)} type = "DateOfBirth" placeholder = "year/mm/dd" id = "DateOfBirth" name = "DateOfBirth"/>
                 <br/>
                 <label htmlFor = "IdNumber">ID Number</label>
                 <input value = {idNumber} onChange={(e) => setIdNumber(e.target.value)} type = "IdNumber" placeholder = "Id Number" id = "IdNumber" name = "IdNumber"/>
@@ -111,8 +101,8 @@ export const Register = (props) => {
                 
             </form>
             
-            <button onClick={()=>navigate("/Login")}>Already have an account? Login here.</button><br/>
+            <button className="link-btn" onClick={()=>navigate("/Login")}>Already have an account? Login here.</button><br/>
             {error}
-        </>
+        </div>
     )
 }

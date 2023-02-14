@@ -1,6 +1,5 @@
 import React,{useState} from "react"
 import { useNavigate } from "react-router-dom"
-import { Link } from "react-router-dom";
 
 export const Login = (props) => {
     const [name,setUserName] = useState('');
@@ -31,19 +30,10 @@ export const Login = (props) => {
             }
         })}
     return (
-        <>
-            <nav>
-                <ul>
-                    
-                    <Link to="/">Home</Link>
-                    <Link to="/About">About</Link>
-                    <Link to="/">Logout</Link>
-                </ul>
-            </nav>
-
+        <div className="Auth-form-container">
             <h1>This is Login page</h1>
             
-            <form onSubmit={handleSubmit}>
+            <form className="login-form" onSubmit={handleSubmit}>
                 <label htmlFor ="UserName">UserName</label>
                 <input value = {name} onChange={(e) => setUserName(e.target.value)} type= "UserName" placeholder = "Your User Name" id = "UserName" name = "UserName"/>
                 <br/>
@@ -54,8 +44,8 @@ export const Login = (props) => {
                 
             </form>
             
-            <button onClick={()=>navigate("/Register")}> Don't have an account? Register here.</button><br/>
+            <button className="link-btn" onClick={()=>navigate("/Register")}> Don't have an account? Register here.</button><br/>
             { error}
-        </>
+        </div>
     )
 }
