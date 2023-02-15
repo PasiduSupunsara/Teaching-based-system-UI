@@ -22,7 +22,7 @@ export const Login = (props) => {
             console.log("response",response);
             console.log(response.status);
             if(response.status===200){
-                navigate("/View")
+                navigate("/Continue")
             }
             else{
                setError("Please try with correct username and password"); 

@@ -8,6 +8,7 @@ import { Login } from './Components/Login'
 import { Register} from './Components/Register'
 import { Update} from './Components/Update'
 import { View } from './Components/View'
+import { Continue } from './Components/Contunue';
 
 
 
@@ -22,6 +23,7 @@ function App(){
       <BrowserRouter>
       <Routes>
       <Route path="/" element={<Login/>}/>
+      <Route path="/Continue" element={<Continue/>}/>
       <Route path="/About" element={<About/>}/>
       <Route path="/Delete" element={<Delete/>}/>
       <Route path="/GetAllUsers" element={<GetAllUsers/>}/>
