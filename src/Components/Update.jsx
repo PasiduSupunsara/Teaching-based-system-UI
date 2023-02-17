@@ -10,7 +10,7 @@ export const Update = (props) => {
         e.preventDefault()
         const user={name,newRole}
         console.log(user)
-        fetch('http://localhost:8080/update',{
+        fetch('http://localhost:8080/admin/update',{
           method:"PUT",
           headers:{"Content-Type":"application/json"},
           body:JSON.stringify(user)

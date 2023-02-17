@@ -6,13 +6,12 @@ export const GetAllUsers = (props) => {
     let navigate=useNavigate();
 
 useEffect(()=>{
-    fetch("http://localhost:8080/getAllUsers")
+    fetch("http://localhost:8080/admin/getAllUsers")
     .then(res=>res.json())
     .then((result)=>{
     setUser(result);
     }
-    )
-    
+    )   
 }, []);
 
 

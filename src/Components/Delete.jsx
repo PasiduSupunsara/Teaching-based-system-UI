@@ -11,7 +11,7 @@ export const Delete = (props) => {
         e.preventDefault()
         const user={name}
         console.log(user)
-        fetch('http://localhost:8080/delete',{
+        fetch('http://localhost:8080/admin/delete',{
           method:"DELETE",
           headers:{"Content-Type":"application/json"},
           body:JSON.stringify(user)
