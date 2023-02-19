@@ -10,15 +10,8 @@ import { Update} from './Components/Update'
 import { View } from './Components/View'
 import { Continue } from './Components/Contunue';
 
-
-
-
 function App(){
-
   return (  
-
-
-    
     <div className="App" >
       <BrowserRouter>
       <Routes>
@@ -27,19 +20,14 @@ function App(){
       <Route path="/About" element={<About/>}/>
       <Route path="/Delete" element={<Delete/>}/>
       <Route path="/GetAllUsers" element={<GetAllUsers/>}/>
-      <Route path="/Login" element={<Login/>}/>
       <Route path="/Update" element={<Update/>}/>
       <Route path="/View" element={<View/>}/>
       <Route path="/Register" element={<Register/>}/>
       </Routes>
       </BrowserRouter>
-    </div>
-
-    
+    </div> 
   );
 }
-
-
 export default App;
 
 
