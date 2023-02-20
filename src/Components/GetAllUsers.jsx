@@ -4,17 +4,22 @@ import { useNavigate } from "react-router-dom";
 export const GetAllUsers = (props) => {
     const [user,setUser] = useState([]);
     let navigate=useNavigate();
+    let tokenJson = JSON.parse(localStorage.getItem('login'));
 
 useEffect(()=>{
-    fetch("http://localhost:8080/admin/getAllUsers")
+  let token = "Bearer "+ tokenJson.token;
+  console.log(token);
+    fetch("http://localhost:8080/admin/getAllUsers",{
+      method:"GET",
+      headers:{"Authorization":token
+        },
+    })
     .then(res=>res.json())
     .then((result)=>{
     setUser(result);
     }
     )   
-}, []);
-
-
+});
 
 return (
     <div >

@@ -5,14 +5,19 @@ export const Update = (props) => {
     const [name,setUserName] = useState('');
     const [newRole,setRole] = useState('');
     let navigate=useNavigate();
+    let tokenJson = JSON.parse(localStorage.getItem('login'));
 
     const handleSubmit=(e)=>{
         e.preventDefault()
         const user={name,newRole}
         console.log(user)
+        let token = "Bearer "+ tokenJson.token;
+        console.log(token);
         fetch('http://localhost:8080/admin/update',{
           method:"PUT",
-          headers:{"Content-Type":"application/json"},
+          headers:{"Content-Type":"application/json",
+          "Authorization":token
+        },
           body:JSON.stringify(user)
     
       }).then(()=>{

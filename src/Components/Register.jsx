@@ -1,6 +1,9 @@
 import React,{useState} from "react"
 import { useNavigate } from "react-router-dom"
-import { Button, Form, Input, Typography } from "antd";
+import { Button, Form, Input, message, Typography } from "antd";
+
+
+
 
 export const Register = (props) => {
     const [name,setUserName] = useState(null);
@@ -12,49 +15,52 @@ export const Register = (props) => {
     const [phoneNumber,setPhoneNumber] = useState(null);
     const [dateOfBirth, setDateOfBirth] = useState(null);
     const [idNumber, setIdNumber] = useState(null);
-    //const [error, setError] = useState(null);
 
 
     let navigate=useNavigate();
+
+    
 
     const handleSubmit=(e)=>{
         const user={firstName,name,password,lastName,address,phoneNumber,email,dateOfBirth,idNumber}
         fetch('http://localhost:8080/signup',{
           method:"POST",
-          headers:{"Content-Type":"application/json"},
+          headers:{"Content-Type":"application/json"
+        },
           body:JSON.stringify(user)
     
         }).then((response)=>{
             console.log("response",response.status);
             if(response.status===200){
-                //setError("Successful registration. You can log now.");
+                message.success("Registration successful")
                 navigate("/");
                 console.log("New User added");
                 console.log(user);
             }
             else if(response.status===201){
-                //setError("Please Enter Valid Password"); 
+                message.warning("Please Enter Valid Password")
                 navigate("/Register");
                 console.log(user);
             }
             else if(response.status===411){
-                //setError("Please Enter Valid Phone Number"); 
+                message.warning("Please Enter Valid Phone Number")
                 navigate("/Register");
                 console.log(user);
             }
             else if(response.status===207){
-                //setError("Please Enter Valid ID Number"); 
+                message.warning("Please Enter Valid ID Number")
                 navigate("/Register");
                 console.log(user);
             }
             else if(response.status===500){
-                //setError("Some details are used previously/Fill all details"); 
+                message.warning("Some details are used previously/Fill all details")
+                message.warning("Shello")
                 navigate("/Register");
                 console.log(user);
             }
 
             else{
-               //setError("Please try with correct username and password"); 
+                message.warning("Please try with correct username and password")
                navigate("/Register");
                console.log(user);
             }
@@ -67,6 +73,7 @@ export const Register = (props) => {
            <Typography.Title>Welcome Back!</Typography.Title>
            <Form.Item rules={[{
                     required:true,
+                    type:"string",
                     message:"please enter your username"
                 }]}label="Username" name={"my username"}>
                     <Input value = {name} onChange={(e) => setUserName(e.target.value)} placeholder="Enter your username"/>
@@ -113,7 +120,7 @@ export const Register = (props) => {
                     type:"date",
                     message:"please enter your Birthday"
                 }]}label="Birthday" name={"my Birthday"}>
-                    <Input value = {dateOfBirth} onChange={(e) => setDateOfBirth(e.target.value)} placeholder="Enter your Birthday"/>
+                    <Input value = {dateOfBirth} onChange={(e) => setDateOfBirth(e.target.value)} placeholder="yyyy/mm/dd"/>
             </Form.Item> 
             <Form.Item rules={[{
                     required:true,
@@ -127,3 +134,10 @@ export const Register = (props) => {
         </div>
     )
 }
+
+
+
+
+
+
+

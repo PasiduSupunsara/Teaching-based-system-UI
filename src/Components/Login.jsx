@@ -1,6 +1,6 @@
 import React,{useState} from "react"
 import { useNavigate } from "react-router-dom"
-import { Button, Form, Input, Typography } from "antd";
+import { Button, Form, Input, message, Typography } from "antd";
 
 export const Login = (props) => {
     const [name,setUserName] = useState('');
@@ -16,8 +16,16 @@ export const Login = (props) => {
             body:JSON.stringify(user)
           }).then((response)=>{
               if (response.status === 200){
-                  navigate("/Continue")
+                message.success("Login succesful")
+                navigate("/View")
               }
+              response.json().then((result) => {
+                console.log("result",result);
+                localStorage.setItem('login',JSON.stringify({
+                    login:true,
+                    token:result.accessToken
+                }))
+              })
           })
         }
     return (
