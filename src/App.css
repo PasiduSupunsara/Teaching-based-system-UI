@@ -84,6 +84,21 @@ button {
   border-radius: 16px;
 }
 
+.navbar {
+  background-color: darkorange;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  color: black;
+  font-size: larger;
+}
+
+
+
+
 
 
 

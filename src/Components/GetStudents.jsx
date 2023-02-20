@@ -1,7 +1,7 @@
 import React,{useEffect, useState} from "react"
 import { useNavigate } from "react-router-dom";
 
-export const GetAllUsers = (props) => {
+export const GetStudents = (props) => {
     const [user,setUser] = useState([]);
     let navigate=useNavigate();
     let tokenJson = JSON.parse(localStorage.getItem('login'));
@@ -9,7 +9,7 @@ export const GetAllUsers = (props) => {
 useEffect(()=>{
   let token = "Bearer "+ tokenJson.token;
   //console.log(token);
-    fetch("http://localhost:8080/admin/getAllUsers",{
+    fetch("http://localhost:8080/getAllStudent",{
       method:"GET",
       headers:{"Authorization":token
         },

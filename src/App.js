@@ -4,6 +4,7 @@ import { About } from './Components/About'
 import './App.css';
 import { Delete } from './Components/Delete';
 import { GetAllUsers } from './Components/GetAllUsers';
+import { GetStudents } from './Components/GetStudents';
 import { Login } from './Components/Login'
 import { Register} from './Components/Register'
 import { Update} from './Components/Update'
@@ -20,6 +21,7 @@ function App(){
       <Route path="/About" element={<About/>}/>
       <Route path="/Delete" element={<Delete/>}/>
       <Route path="/GetAllUsers" element={<GetAllUsers/>}/>
+      <Route path="/GetStudents" element={<GetStudents/>}/>
       <Route path="/Update" element={<Update/>}/>
       <Route path="/View" element={<View/>}/>
       <Route path="/Register" element={<Register/>}/>

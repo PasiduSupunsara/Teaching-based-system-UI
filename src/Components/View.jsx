@@ -11,6 +11,7 @@ export const View = (props) => {
             <button onClick={()=>{navigate("/Update")}} type="submit" >Update</button><br/>
             <button onClick={()=>{navigate("/Delete")}} type="submit" >Delete</button><br/>
             <button onClick={()=>{navigate("/GetAllUsers")}} type="submit" >GetAllUsers</button><br/>
+            <button onClick={()=>{navigate("/GetStudents")}} type="submit" >GetStudents</button><br/>
             <button onClick={()=>{navigate("/")}} type="submit" >Logout</button>
             
         </div>
