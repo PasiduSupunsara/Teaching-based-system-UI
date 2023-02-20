@@ -1,5 +1,6 @@
 import React,{useEffect, useState} from "react"
 import { useNavigate } from "react-router-dom";
+import { Navbar } from "./Navbar";
 
 export const GetAllUsers = (props) => {
     const [user,setUser] = useState([]);
@@ -8,7 +9,6 @@ export const GetAllUsers = (props) => {
 
 useEffect(()=>{
   let token = "Bearer "+ tokenJson.token;
-  //console.log(token);
     fetch("http://localhost:8080/admin/getAllUsers",{
       method:"GET",
       headers:{"Authorization":token
@@ -23,6 +23,7 @@ useEffect(()=>{
 
 return (
     <div >
+      <Navbar/>
     <h1 className="Header">User Details</h1>
     <ul >
       {user.map((item, index) => (

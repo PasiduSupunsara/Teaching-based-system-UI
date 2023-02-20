@@ -11,13 +11,12 @@ import { Register} from './Components/Register'
 import { Update} from './Components/Update'
 import { View } from './Components/View'
 import { Continue } from './Components/Contunue';
-import { Navbar } from './Components/Navbar';
+
 
 function App(){
   return (  
     <div className="App" >
       <BrowserRouter>
-      <Navbar/>
       <Routes>
       <Route path="/" element={<Login/>}/>
       <Route path="/Continue" element={<Continue/>}/>

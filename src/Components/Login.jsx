@@ -1,15 +1,16 @@
 import React,{useState} from "react"
 import { useNavigate } from "react-router-dom"
 import { Button, Form, Input, message, Typography } from "antd";
+import { Navbar } from "./Navbar";
 
 export const Login = (props) => {
     const [name,setUserName] = useState('');
     const [password,setPassword] = useState('');
     let navigate=useNavigate();
+    
 
     const handleSubmit = (e) =>{
        const user = {name,password}
-       console.log(user);
         fetch('http://localhost:8080/login',{
             method:"POST",
             headers:{"Content-Type":"application/json"},
@@ -20,7 +21,7 @@ export const Login = (props) => {
                 navigate("/View")
               }
               response.json().then((result) => {
-                console.log("result",result);
+                localStorage.setItem('user-info',JSON.stringify(user));
                 localStorage.setItem('login',JSON.stringify({
                     login:true,
                     token:result.accessToken
@@ -29,6 +30,8 @@ export const Login = (props) => {
           })
         }
     return (
+        <div>
+            <Navbar/>
         <div className="appLog">
            <Form className="loginForm" onFinish={handleSubmit}>
            <Typography.Title>Welcome Back!</Typography.Title>
@@ -49,6 +52,7 @@ export const Login = (props) => {
                 
            </Form>
            
+        </div>
         </div>
     )
 }

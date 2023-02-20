@@ -1,5 +1,6 @@
 import React,{useEffect, useState} from "react"
 import { useNavigate } from "react-router-dom";
+import { Navbar } from "./Navbar";
 
 export const GetStudents = (props) => {
     const [user,setUser] = useState([]);
@@ -23,6 +24,7 @@ useEffect(()=>{
 
 return (
     <div >
+      <Navbar/>
     <h1 className="Header">User Details</h1>
     <ul >
       {user.map((item, index) => (

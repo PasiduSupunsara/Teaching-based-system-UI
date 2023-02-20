@@ -1,5 +1,6 @@
 import React,{useState} from "react"
 import { useNavigate } from "react-router-dom";
+import {Navbar} from './Navbar'
 
 export const Update = (props) => {
     const [name,setUserName] = useState('');
@@ -26,6 +27,8 @@ export const Update = (props) => {
       navigate("/View")
     }
     return (
+      <div>
+        <Navbar/>
         <div className="Delete-form-container">
             <h1 className="Header"> UPDATE PAGE</h1>
             <form className="delete-form" onSubmit={handleSubmit}>
@@ -41,6 +44,7 @@ export const Update = (props) => {
                 
             </form>
             <button onClick={() => navigate('/View')}>Back</button>
+        </div>
         </div>
     )
 }

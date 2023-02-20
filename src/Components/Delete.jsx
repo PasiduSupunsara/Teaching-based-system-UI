@@ -1,5 +1,6 @@
 import React,{useState} from "react"
 import { useNavigate } from "react-router-dom";
+import { Navbar } from "./Navbar";
 
 
 export const Delete = (props) => {
@@ -27,6 +28,8 @@ export const Delete = (props) => {
       navigate("/View")
     }
     return (
+      <div>
+        <Navbar/>
         <div className="Delete-form-container">
             <form className="Header" onSubmit={handleSubmit}>
             <h1 className="Header">This is Delete page</h1>
@@ -38,6 +41,7 @@ export const Delete = (props) => {
                 
             </form>
             <button onClick={() => navigate('/View')}>Back</button>
+        </div>
         </div>
     )
 }
