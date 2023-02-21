@@ -24,7 +24,7 @@ export const Update = (props) => {
       }).then(()=>{
         console.log("User Updated")
       })
-      navigate("/View")
+      navigate("/Dashboard")
     }
     return (
       <div>
@@ -43,7 +43,7 @@ export const Update = (props) => {
                 
                 
             </form>
-            <button onClick={() => navigate('/View')}>Back</button>
+            <button onClick={() => navigate('/Dashboards')}>Back</button>
         </div>
         </div>
     )

@@ -25,7 +25,7 @@ export const Delete = (props) => {
       }).then(()=>{
         console.log("User Deleted")
       })
-      navigate("/View")
+      navigate("/Dashboard")
     }
     return (
       <div>
@@ -40,7 +40,7 @@ export const Delete = (props) => {
                 
                 
             </form>
-            <button onClick={() => navigate('/View')}>Back</button>
+            <button onClick={() => navigate('/Dashboard')}>Back</button>
         </div>
         </div>
     )

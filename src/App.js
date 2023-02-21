@@ -11,6 +11,7 @@ import { Register} from './Components/Register'
 import { Update} from './Components/Update'
 import { View } from './Components/View'
 import { Continue } from './Components/Contunue';
+import { Dashboard } from './Components/Dashboard';
 
 
 function App(){
@@ -19,6 +20,7 @@ function App(){
       <BrowserRouter>
       <Routes>
       <Route path="/" element={<Login/>}/>
+      <Route path="/Dashboard" element={<Dashboard/>}/>
       <Route path="/Continue" element={<Continue/>}/>
       <Route path="/About" element={<About/>}/>
       <Route path="/Home" element={<Home/>}/>

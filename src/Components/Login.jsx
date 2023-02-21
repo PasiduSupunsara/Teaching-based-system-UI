@@ -18,15 +18,17 @@ export const Login = (props) => {
           }).then((response)=>{
               if (response.status === 200){
                 message.success("Login succesful")
-                navigate("/View")
+                navigate("/Dashboard")
               }
               response.json().then((result) => {
                 localStorage.setItem('user-info',JSON.stringify(user));
                 localStorage.setItem('login',JSON.stringify({
                     login:true,
-                    token:result.accessToken
+                    token:result.accessToken,
+                    role:result.role
                 }))
               })
+              
           })
         }
     return (
