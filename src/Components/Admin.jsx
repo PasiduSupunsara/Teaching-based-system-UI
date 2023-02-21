@@ -187,7 +187,7 @@ export const Admin = () => {
               <i>Delete User</i>
             </Button>
           </Link>
-          <h2 style={{ color: "#1eb2a6" }}>{tableTitle}</h2>
+          <h2 style={{ color: "#591E66" }}>{tableTitle}</h2>
           <Table dataSource={dataSource} columns={columns} />
         </div>
       </Layout.Content>
