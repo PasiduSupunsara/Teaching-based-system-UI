@@ -13,7 +13,6 @@ import { View } from './Components/View'
 import { Continue } from './Components/Contunue';
 import { Dashboard } from './Components/Dashboard';
 
-
 function App(){
   return (  
     <div className="App" >

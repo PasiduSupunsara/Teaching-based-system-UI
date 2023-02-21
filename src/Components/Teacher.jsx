@@ -68,7 +68,7 @@ export const Teacher = () => {
       setStudents(result);
       }
       )
-  });
+  },[]);
 
 
 

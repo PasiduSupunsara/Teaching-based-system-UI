@@ -43,6 +43,11 @@ export const Register = (props) => {
                 navigate("/Register");
                 console.log(user);
             }
+            else if(response.status===406){
+                message.warning("Please enter valid Name")
+                navigate("/Register");
+                console.log(user);
+            }
             else if(response.status===411){
                 message.warning("Please Enter Valid Phone Number")
                 navigate("/Register");

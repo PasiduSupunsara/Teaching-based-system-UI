@@ -3,6 +3,7 @@ import { Table, Layout, Button } from "antd";
 import { Link} from "react-router-dom";
 import { Navbar } from "./Navbar";
 
+
 const columns = [
 
   {
@@ -61,7 +62,7 @@ export const Admin = () => {
   let tokenJson = JSON.parse(localStorage.getItem('login'));
 
   useEffect(()=>{
-    let token = "Bearer "+ tokenJson.token;
+    let token = "Bearer "+ tokenJson.accessToken;
       fetch("http://localhost:8080/admin/getAllUsers",{
         method:"GET",
         headers:{"Authorization":token
@@ -102,7 +103,7 @@ export const Admin = () => {
       setAdmin(result);
       }
       )   
-  });
+  },[]);
 
 
 
@@ -139,12 +140,13 @@ export const Admin = () => {
   }
 
   return (
+    <div>
     <Layout>
       <Layout.Header>
         < Navbar/>
       </Layout.Header>
-      <Layout.Content>
-        <div style={{ padding: " 50px" }}>
+      <Layout.Content >
+        <div className="table">
           <Button
             className="home-button"
             type="primary"
@@ -187,10 +189,13 @@ export const Admin = () => {
               <i>Delete User</i>
             </Button>
           </Link>
+          </div>
           <h2 style={{ color: "#591E66" }}>{tableTitle}</h2>
+          <div>
           <Table dataSource={dataSource} columns={columns} />
         </div>
       </Layout.Content>
     </Layout>
+    </div>
   );
 }
