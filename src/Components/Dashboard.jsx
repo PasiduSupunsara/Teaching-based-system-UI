@@ -9,13 +9,16 @@ export const Dashboard = () => {
   const [role, setRole] = useState();
   let tokenJson = JSON.parse(localStorage.getItem('login'));
 
-
-
   useEffect(() => {
-    const role = tokenJson.role;
-    setRole(role);
+    let tokenJson = JSON.parse(localStorage.getItem('login'));
+    console.log("tokenJson :", tokenJson);
+    if (tokenJson){
+      const role = tokenJson.role;
+      setRole(role);
+    }
+    
 
-  },[tokenJson.role]);
+  },[]);
 
   switch (role) {
     case "ADMIN":

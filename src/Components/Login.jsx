@@ -17,22 +17,24 @@ export const Login = (props) => {
             body:JSON.stringify(user)
           }).then((response)=>{
               if (response.status === 200){
-                message.success("Login succesful")
-                navigate("/Dashboard")
+                response.json().then((result) => {
+                    localStorage.setItem('username',JSON.stringify(user.name));
+                    localStorage.setItem('login',JSON.stringify({
+                        login:true,
+                        accessToken:result.accessToken,
+                        refreshToken:result.refreshToken,
+                        role:result.role
+                    }))
+                    message.success("Login succesful")
+                navigate("/Dashboard", {state: {}})
+                  })
+                
               }
-              else if (response.status === 401){
+              if (response.status === 401){
                 message.error("Please Try again with correct username and password")
                 
               }
-              response.json().then((result) => {
-                localStorage.setItem('username',JSON.stringify(user.name));
-                localStorage.setItem('login',JSON.stringify({
-                    login:true,
-                    accessToken:result.accessToken,
-                    refreshToken:result.refreshToken,
-                    role:result.role
-                }))
-              })
+              
               
           })
         }
