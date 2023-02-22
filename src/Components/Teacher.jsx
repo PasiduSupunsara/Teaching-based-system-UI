@@ -57,7 +57,7 @@ export const Teacher = () => {
   let tokenJson = JSON.parse(localStorage.getItem('login'));
 
   useEffect(()=>{
-    let token = "Bearer "+ tokenJson.token;  
+    let token = "Bearer "+ tokenJson.accessToken;  
       fetch("http://localhost:8080/getAllStudent",{
         method:"GET",
         headers:{"Authorization":token

@@ -8,25 +8,22 @@ import { Navbar } from "./Navbar";
 
 const columns = [
   {
-    title: "Course",
+    title: "Subject",
     dataIndex: "",
     key: "",
   },
   {
-    title: "Instructor",
+    title: "Due Date",
     dataIndex: "",
     key: "",
   },
   {
-    title: "Assignments",
+    title: "Homework",
     dataIndex: "",
     key: "",
   },
-  {
-    title: "Current Grade",
-    dataIndex: "",
-    key: "",
-  },
+  
+
 ];
 
 export const Student = () => {
@@ -37,7 +34,7 @@ export const Student = () => {
       </Layout.Header>
       <Layout.Content>
         <div style={{ padding: "50px" }}>
-          <h2 style={{ color: "#1eb2a6" }}>Overview</h2>
+         
           <Table
             style={{ borderBlockEndWidth: "5px", marginTop: 50 }}
             dataSource={""}
