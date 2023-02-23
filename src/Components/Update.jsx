@@ -1,16 +1,19 @@
 import React,{useState} from "react"
 import { useNavigate } from "react-router-dom";
-import { Button, Form, Input, Typography } from "antd";
+import { Button, Form, Input, message, Typography } from "antd";
 import {Navbar} from './Navbar'
 
 export const Update = (props) => {
     const [name,setUserName] = useState('');
+    const principalName = JSON.parse(localStorage.getItem('username'));
     const [newRole,setRole] = useState('');
     let navigate=useNavigate();
     let tokenJson = JSON.parse(localStorage.getItem('login'));
+    
+    
 
     const handleSubmit=(e)=>{
-        const user={name,newRole}
+        const user={name,newRole,principalName}
         console.log(user)
         let token = "Bearer "+ tokenJson.accessToken;
         console.log(token);
@@ -20,11 +23,23 @@ export const Update = (props) => {
           "Authorization":token
         },
           body:JSON.stringify(user)
-    
-      }).then(()=>{
-        console.log("User Updated")
-      })
-      navigate("/Dashboard")
+      }).then((response)=>{
+        if (response.status === 200){
+          message.success("Update successful")
+          navigate("/Dashboard");
+        }
+        else if (response.status === 203){
+          message.error("You can't update your self")
+          navigate("/update");
+        }
+        else{
+          message.error("Something wrong please try again")
+          navigate("/update");
+        }
+        
+        
+    })
+
     }
     return (
       <div>
