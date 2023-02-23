@@ -7,11 +7,12 @@ import { Button, Form, Input, Typography } from "antd";
 export const Delete = (props) => {
     const [name,setUserName] = useState('');
     let navigate=useNavigate();
+    const principalName = JSON.parse(localStorage.getItem('username'));
     let tokenJson = JSON.parse(localStorage.getItem('login'));
     
 
     const handleSubmit=(e)=>{
-        const user={name}
+        const user={name,principalName}
         console.log(user)
         let token = "Bearer "+ tokenJson.accessToken;
         console.log(token);

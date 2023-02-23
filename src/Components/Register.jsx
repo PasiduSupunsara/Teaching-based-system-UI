@@ -43,8 +43,13 @@ export const Register = (props) => {
                 navigate("/Register");
                 console.log(user);
             }
+            else if(response.status===400){
+                message.warning("Please Enter Valid Name")
+                navigate("/Register");
+                console.log(user);
+            }
             else if(response.status===406){
-                message.warning("Please enter valid Name")
+                message.warning("Please enter valid User Name")
                 navigate("/Register");
                 console.log(user);
             }
