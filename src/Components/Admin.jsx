@@ -58,22 +58,12 @@ export const Admin = () => {
   const [teachers, setTeachers] = useState([]);
   const [admin, setAdmin] = useState([]);
   const [users, setUsers] = useState([]);
-  const [selected, setSelected] = useState("users");
+  const [selected, setSelected] = useState(null);
   let tokenJson = JSON.parse(localStorage.getItem('login'));
 
   useEffect(()=>{
     let token = "Bearer "+ tokenJson.accessToken;
-      fetch("http://localhost:8080/admin/getAllUsers",{
-        method:"GET",
-        headers:{"Authorization":token
-          },
-      })
-      .then(res=>res.json())
-      .then((result)=>{
-      setUsers(result);
-      }
-      )   
-      fetch("http://localhost:8080/getAllStudent",{
+      fetch("http://localhost:8080/admin/getAllStudent",{
         method:"GET",
         headers:{"Authorization":token
           },
@@ -83,7 +73,7 @@ export const Admin = () => {
       setStudents(result);
       }
       )
-      fetch("http://localhost:8080/getAllTeachers",{
+      fetch("http://localhost:8080/admin/getAllTeachers",{
         method:"GET",
         headers:{"Authorization":token
           },
@@ -93,7 +83,17 @@ export const Admin = () => {
       setTeachers(result);
       }
       )
-      fetch("http://localhost:8080/getAllAdmins",{
+      fetch("http://localhost:8080/admin/getAllUsers",{
+        method:"GET",
+        headers:{"Authorization":token
+          },
+      })
+      .then(res=>res.json())
+      .then((result)=>{
+      setUsers(result);
+      }
+      ) 
+      fetch("http://localhost:8080/admin/getAllAdmins",{
         method:"GET",
         headers:{"Authorization":token
           },

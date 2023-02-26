@@ -58,7 +58,7 @@ export const Teacher = () => {
 
   useEffect(()=>{
     let token = "Bearer "+ tokenJson.accessToken;  
-      fetch("http://localhost:8080/getAllStudent",{
+      fetch("http://localhost:8080/teacher/getAllStudent",{
         method:"GET",
         headers:{"Authorization":token
           },
