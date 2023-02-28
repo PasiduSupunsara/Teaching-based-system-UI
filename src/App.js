@@ -14,6 +14,7 @@ import { Continue } from './Components/Contunue';
 import { Dashboard } from './Components/Dashboard';
 import {CreateNewCourse} from './Components/CreateNewCourse'
 import { GetAllCourses } from './Components/GetAllCourses'
+import {GetCourseById} from './Components/GetCoureseById'
 
 function App(){
   return (  
@@ -33,6 +34,8 @@ function App(){
       <Route path="/Register" element={<Register/>}/>
       <Route path="/CreateNewCourse" element={<CreateNewCourse/>}/>
       <Route path="/GetAllCourses" element={<GetAllCourses/>}/>
+      <Route path="/GetCourseById" element={<GetCourseById/>}/>
+
       </Routes>
       </BrowserRouter>
     </div> 

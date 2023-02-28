@@ -1,5 +1,5 @@
 import {Button, Card, message, Progress} from 'antd'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export function CardComponent(props){
     const sid = props.id;
@@ -12,6 +12,26 @@ export function CardComponent(props){
         const val = (((date - startDate)/ (1000 * 60 * 60 * 24))/(6*30))*100;
         return Math.round(val)
     }
+
+    useEffect(()=>{
+        const id = {sid,courseid}
+        let token = "Bearer "+ tokenJson.accessToken;
+        fetch('http://localhost:8080/student/CountCourseStudent',{
+             method:"POST",
+             headers:{"Content-Type":"application/json",
+             "Authorization":token
+            },
+             body:JSON.stringify(id)
+           }).then(res=>res.json()).then((result)=>{
+            if (result === 1){
+                setSwitchEnroll("Unenroll");
+            }      
+            else{
+                setSwitchEnroll("Enroll")
+            }  
+           })
+   
+      },[]);
 
     const handleSubmit = (e) =>{
         const id = {sid,courseid}
@@ -26,7 +46,6 @@ export function CardComponent(props){
            }).then((response)=>{  
             if (response.status === 200){
                 message.success("success")
-                setSwitchEnroll("Unenroll");
             }else{
                 message.error("something wrong")
             }

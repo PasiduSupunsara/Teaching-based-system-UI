@@ -206,7 +206,7 @@ export const Admin = () => {
           </div>
           <h2 style={{ color: "#591E66" }}>{tableTitle}</h2>
           <div>
-          <Table dataSource={dataSource} columns={columns} pagination={{pageSize:5,}}/>
+          <Table dataSource={dataSource} columns={columns} pagination={{pageSize:10,}}/>
         </div>
       </Layout.Content>
     </Layout>

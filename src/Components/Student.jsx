@@ -31,7 +31,7 @@ export const Student = () => {
 
 
   useEffect(()=>{
-    let token = "Bearer "+ tokenJson.accessToken;  
+    let token = "Bearer "+ tokenJson.accessToken; 
       fetch("http://localhost:8080/student/getAllCourses",{
         method:"GET",
         headers:{"Authorization":token
@@ -59,7 +59,8 @@ export const Student = () => {
           />
         </div>
       </Layout.Content>
-      {courses.map((course) => <CardComponent courseid={course.courseid} coursename={course.coursename} name={course.medium} startdate={course.startdate} id={tokenJson.id}/>)}
+      {courses.map((course) => <CardComponent courseid={course.courseid} coursename={course.coursename} 
+      name={course.medium} startdate={course.startdate} id={tokenJson.id}/>)}
     </Layout>
   );
 }
