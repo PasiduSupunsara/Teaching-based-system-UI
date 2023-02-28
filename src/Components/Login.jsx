@@ -23,7 +23,8 @@ export const Login = (props) => {
                         login:true,
                         accessToken:result.accessToken,
                         refreshToken:result.refreshToken,
-                        role:result.role
+                        role:result.role,
+                        id:result.uid
                     }))
                     message.success("Login succesful")
                 navigate("/Dashboard", {state: {}})

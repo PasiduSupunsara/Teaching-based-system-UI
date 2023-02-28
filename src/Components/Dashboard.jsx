@@ -7,7 +7,6 @@ import {Student} from './Student'
 
 export const Dashboard = () => {
   const [role, setRole] = useState();
-  let tokenJson = JSON.parse(localStorage.getItem('login'));
 
   useEffect(() => {
     let tokenJson = JSON.parse(localStorage.getItem('login'));

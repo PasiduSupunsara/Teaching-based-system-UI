@@ -2,31 +2,48 @@ import React from "react";
 import { Table,Layout} from "antd";
 import "./Dashboard";
 import { Navbar } from "./Navbar";
-
-
-
+import {CardComponent} from './CardComponent'
+import {useState,useEffect} from 'react'
 
 const columns = [
   {
-    title: "Subject",
-    dataIndex: "",
-    key: "",
+    title: "Course",
+    dataIndex: "Course",
+    key: "Course",
   },
   {
-    title: "Due Date",
-    dataIndex: "",
-    key: "",
+    title: "DueDate",
+    dataIndex: "DueDate",
+    key: "DueDate",
   },
   {
     title: "Homework",
-    dataIndex: "",
-    key: "",
+    dataIndex: "Homework",
+    key: "Homework",
   },
   
 
 ];
 
 export const Student = () => {
+  const [courses, setCourses] = useState([]);
+  let tokenJson = JSON.parse(localStorage.getItem('login'));
+
+
+  useEffect(()=>{
+    let token = "Bearer "+ tokenJson.accessToken;  
+      fetch("http://localhost:8080/student/getAllCourses",{
+        method:"GET",
+        headers:{"Authorization":token
+          },
+      })
+      .then(res=>res.json())
+      .then((result)=>{
+      setCourses(result);
+      }
+      )
+  },[]);
+
   return (
     <Layout>
       <Layout.Header>
@@ -42,6 +59,7 @@ export const Student = () => {
           />
         </div>
       </Layout.Content>
+      {courses.map((course) => <CardComponent courseid={course.courseid} coursename={course.coursename} name={course.medium} startdate={course.startdate} id={tokenJson.id}/>)}
     </Layout>
   );
 }

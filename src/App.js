@@ -12,6 +12,8 @@ import { Update} from './Components/Update'
 import { View } from './Components/View'
 import { Continue } from './Components/Contunue';
 import { Dashboard } from './Components/Dashboard';
+import {CreateNewCourse} from './Components/CreateNewCourse'
+import { GetAllCourses } from './Components/GetAllCourses'
 
 function App(){
   return (  
@@ -29,6 +31,8 @@ function App(){
       <Route path="/Update" element={<Update/>}/>
       <Route path="/View" element={<View/>}/>
       <Route path="/Register" element={<Register/>}/>
+      <Route path="/CreateNewCourse" element={<CreateNewCourse/>}/>
+      <Route path="/GetAllCourses" element={<GetAllCourses/>}/>
       </Routes>
       </BrowserRouter>
     </div> 

@@ -4,8 +4,6 @@ import { Button, Form, Input, message, Typography } from "antd";
 import {Navbar} from './Navbar';
 
 
-
-
 export const Register = (props) => {
     const [name,setUserName] = useState(null);
     const [firstName,setFirstName] = useState(null);
@@ -18,7 +16,10 @@ export const Register = (props) => {
     const [idNumber, setIdNumber] = useState(null);
 
 
+
+
     let navigate=useNavigate();
+
 
     
 
@@ -132,7 +133,10 @@ export const Register = (props) => {
                     type:"date",
                     message:"please enter your Birthday"
                 }]}label="Birthday" name={"my Birthday"}>
-                    <Input value = {dateOfBirth} onChange={(e) => setDateOfBirth(e.target.value)} placeholder="yyyy/mm/dd"/>
+                    
+                    <Input type="date" value = {dateOfBirth} onChange={(e) => setDateOfBirth(e.target.value)} placeholder="yyyy/mm/dd"/>
+                    
+                     
             </Form.Item> 
             <Form.Item rules={[{
                     required:true,

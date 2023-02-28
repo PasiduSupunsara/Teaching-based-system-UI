@@ -4,6 +4,7 @@ import { Link} from "react-router-dom";
 import { Navbar } from "./Navbar";
 
 
+
 const columns = [
 
   {
@@ -179,6 +180,19 @@ export const Admin = () => {
           >
             View All Users
           </Button>
+
+          <Link to="/CreateNewCourse">
+            <Button className="home-button" type="default" size="large">
+              <i>Create course Role</i>
+            </Button>
+          </Link>
+
+          <Link to="/GetAllCourses">
+            <Button className="home-button" type="default" size="large">
+              <i>Get All Courses</i>
+            </Button>
+          </Link>
+
           <Link to="/Update">
             <Button className="home-button" type="default" size="large">
               <i>Update Role</i>
@@ -192,7 +206,7 @@ export const Admin = () => {
           </div>
           <h2 style={{ color: "#591E66" }}>{tableTitle}</h2>
           <div>
-          <Table dataSource={dataSource} columns={columns} />
+          <Table dataSource={dataSource} columns={columns} pagination={{pageSize:5,}}/>
         </div>
       </Layout.Content>
     </Layout>
