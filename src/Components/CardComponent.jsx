@@ -1,9 +1,12 @@
 import {Button, Card, message, Progress} from 'antd'
 import { useEffect, useState } from 'react';
+import { useNavigate} from 'react-router-dom';
+
 
 export function CardComponent(props){
     const sid = props.id;
     const courseid = props.courseid;
+    let navigate=useNavigate();
     const[switchEnroll,setSwitchEnroll]= useState("Enroll")
 
     let tokenJson = JSON.parse(localStorage.getItem('login'));
@@ -33,6 +36,23 @@ export function CardComponent(props){
             }  
            })
       },[courseid]);
+
+    const handleClick = (e) => {
+        let id = courseid
+        let token = "Bearer "+ tokenJson.accessToken;
+        fetch('http://localhost:8080/student/findByCourseId',{
+             method:"POST",
+             headers:{"Content-Type":"application/json",
+             "Authorization":token
+            },
+             body:JSON.stringify(id)
+           }).then(res=>res.json())
+           .then((result)=>{   
+            console.log(result.courseid) 
+            navigate("/CourseDetails",{state: {courseid:result.courseid,coursename:result.coursename,details:result.description
+                ,duration:result.duration,fee:result.fee, startdate:result.startdate,medium:result.medium }})  
+           })
+    }
 
     const handleSubmit = (e) =>{
         const id = {sid,courseid}
@@ -83,7 +103,7 @@ export function CardComponent(props){
                 (((new Date() - new Date(props.startdate)) > 0 ) && (switchEnroll === "Unenroll") )?
                 <Progress className='progerss' percent={precentageCal(new Date(props.startdate),new Date())}></Progress>:null
             }
-            <Button>Details</Button>
+            <Button onClick={handleClick}>Details</Button>
             {
                 ((new Date(props.startdate) - new Date() ) > 0 )?
                 <Button onClick={handleSubmit} htmlType="submit">{switchEnroll}</Button>:null

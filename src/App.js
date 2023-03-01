@@ -15,6 +15,8 @@ import { Dashboard } from './Components/Dashboard';
 import {CreateNewCourse} from './Components/CreateNewCourse'
 import { GetAllCourses } from './Components/GetAllCourses'
 import {GetCourseById} from './Components/GetCoureseById'
+import { CourseDetails } from './Components/CourseDetails';
+
 
 function App(){
   return (  
@@ -35,6 +37,8 @@ function App(){
       <Route path="/CreateNewCourse" element={<CreateNewCourse/>}/>
       <Route path="/GetAllCourses" element={<GetAllCourses/>}/>
       <Route path="/GetCourseById" element={<GetCourseById/>}/>
+      <Route path="/CourseDetails" element={<CourseDetails/>}/>
+      
 
       </Routes>
       </BrowserRouter>

@@ -14,9 +14,14 @@ export const Navbar = () => {
             
             <h3 className="logo">LEARNING MANAGEMENT SYSTEM</h3>
             <ul className="nav-links">
+                {
+                    user?
+                    null
+                    :
+                    <><Link to="/">Login</Link>
+                    <Link to="/Register">Register</Link></>
+                }
                 
-                <Link to="/">Login</Link>
-                <Link to="/Register">Register</Link>
                 <Link to="/Home">Home</Link>
                 <Link to="/About">About</Link>
             </ul>

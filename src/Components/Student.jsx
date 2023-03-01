@@ -4,6 +4,8 @@ import "./Dashboard";
 import { Navbar } from "./Navbar";
 import {CardComponent} from './CardComponent'
 import {useState,useEffect} from 'react'
+import { Input, Space } from 'antd';
+const { Search } = Input;
 
 const columns = [
   {
@@ -30,6 +32,8 @@ export const Student = () => {
   let tokenJson = JSON.parse(localStorage.getItem('login'));
   let token = "Bearer "+ tokenJson.accessToken; 
   const id = tokenJson.id
+
+  const onSearch = (value) => console.log(value);
 
 
   useEffect(()=>{
@@ -80,7 +84,11 @@ export const Student = () => {
           />
         </div>
       </Layout.Content>
-      <Button onClick={handleSubmit}>Select mode:{mode}</Button>
+      <Space direction="vertical">
+        <Search placeholder="input search text" allowClear enterButton="Search" size="middle" onSearch={onSearch}/>
+      </Space>
+      <Button onClick={handleSubmit}>Switch    :  {mode}</Button>
+      
       {
         (mode === "All Courses")?
         <>{courses.map((course) => <CardComponent courseid={course.courseid} coursename={course.coursename} 
