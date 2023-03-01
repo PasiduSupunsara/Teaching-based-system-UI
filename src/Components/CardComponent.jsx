@@ -37,7 +37,8 @@ export function CardComponent(props){
         const id = {sid,courseid}
         let token = "Bearer "+ tokenJson.accessToken;
         const mapcoursestudent= {id}
-         fetch('http://localhost:8080/student/mapStudentCourse',{
+        if(switchEnroll === "Enroll"){
+            fetch('http://localhost:8080/student/mapStudentCourse',{
              method:"POST",
              headers:{"Content-Type":"application/json",
              "Authorization":token
@@ -45,12 +46,31 @@ export function CardComponent(props){
              body:JSON.stringify(mapcoursestudent)
            }).then((response)=>{  
             if (response.status === 200){
+                setSwitchEnroll("Unenroll");
                 message.success("success")
             }else{
                 message.error("something wrong")
             }
            })
-         }
+        }
+        else if(switchEnroll === "Unenroll"){
+            fetch('http://localhost:8080/student/deleteMappingstudentcourse',{
+             method:"DELETE",
+             headers:{"Content-Type":"application/json",
+             "Authorization":token
+            },
+             body:JSON.stringify(id)
+           }).then((response)=>{  
+            if (response.status === 200){
+                setSwitchEnroll("Enroll");
+                message.success("success")
+            }else{
+                message.error("something wrong")
+            }
+           })
+        }
+         
+    }
     
     return(
         <Card className="dashboard-card">
