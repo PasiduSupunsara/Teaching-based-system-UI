@@ -13,6 +13,7 @@ export function CardComponent(props){
         return Math.round(val)
     }
 
+
     useEffect(()=>{
         const id = {sid,courseid}
         let token = "Bearer "+ tokenJson.accessToken;
@@ -78,9 +79,17 @@ export function CardComponent(props){
             <h2>{props.coursename}</h2>
             <h4>{props.courseid}</h4>
             <h4>{props.name}</h4>
-            <Progress className='progerss' percent={precentageCal(new Date(props.startdate),new Date())}></Progress>
+            {
+                ((new Date() - new Date(props.startdate)) > 0 )?
+                <Progress className='progerss' percent={precentageCal(new Date(props.startdate),new Date())}></Progress>:null
+            }
+            
             <Button>Details</Button>
-            <Button onClick={handleSubmit} htmlType="submit">{switchEnroll}</Button>
+            {
+                ((new Date(props.startdate) - new Date() ) > 0 )?
+                <Button onClick={handleSubmit} htmlType="submit">{switchEnroll}</Button>:null
+            }
+            
             </div> 
         </Card>
     )

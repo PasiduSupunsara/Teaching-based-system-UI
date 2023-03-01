@@ -183,7 +183,7 @@ export const Admin = () => {
 
           <Link to="/CreateNewCourse">
             <Button className="home-button" type="default" size="large">
-              <i>Create course Role</i>
+              <i>Create course</i>
             </Button>
           </Link>
 
