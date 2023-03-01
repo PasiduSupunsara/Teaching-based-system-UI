@@ -1,5 +1,5 @@
 import React from "react";
-import { Table,Layout} from "antd";
+import { Table,Layout, Button} from "antd";
 import "./Dashboard";
 import { Navbar } from "./Navbar";
 import {CardComponent} from './CardComponent'
@@ -21,17 +21,31 @@ const columns = [
     dataIndex: "Homework",
     key: "Homework",
   },
-  
-
 ];
 
 export const Student = () => {
   const [courses, setCourses] = useState([]);
+  const [coursesId, setCoursesId] = useState([]);
+  const [mode,setMode] = useState("Enrolled Courses")
   let tokenJson = JSON.parse(localStorage.getItem('login'));
+  let token = "Bearer "+ tokenJson.accessToken; 
+  const id = tokenJson.id
 
 
   useEffect(()=>{
-    let token = "Bearer "+ tokenJson.accessToken; 
+    const sid = {id}
+      fetch('http://localhost:8080/student/findAllCoursesById',{
+      method:"POST",
+      headers:{"Content-Type":"application/json",
+      "Authorization":token
+      },
+      body:JSON.stringify(sid)
+      })
+      .then(res=>res.json())
+      .then((result)=>{
+      setCoursesId(result)
+      console.log(coursesId)
+      }) 
       fetch("http://localhost:8080/student/getAllCourses",{
         method:"GET",
         headers:{"Authorization":token
@@ -40,10 +54,17 @@ export const Student = () => {
       .then(res=>res.json())
       .then((result)=>{
       setCourses(result);
-      }
-      )
+      })   
   },[]);
 
+  const handleSubmit = (e) =>{
+    if(mode === "All Courses"){
+      setMode("Enrolled Course")
+    }
+    else{ 
+      setMode("All Courses")
+    }   
+  }
   return (
     <Layout>
       <Layout.Header>
@@ -59,8 +80,16 @@ export const Student = () => {
           />
         </div>
       </Layout.Content>
-      {courses.map((course) => <CardComponent courseid={course.courseid} coursename={course.coursename} 
-      name={course.medium} startdate={course.startdate} id={tokenJson.id}/>)}
+      <Button onClick={handleSubmit}>Select mode:{mode}</Button>
+      {
+        (mode === "All Courses")?
+        <>{courses.map((course) => <CardComponent courseid={course.courseid} coursename={course.coursename} 
+        name={course.medium} startdate={course.startdate} id={tokenJson.id}/>)}
+        </>
+        :
+        <>{coursesId.map((course) => <CardComponent courseid={course.courseid} coursename={course.coursename} 
+        name={course.medium} startdate={course.startdate} id={tokenJson.id}/>)}</>
+      } 
     </Layout>
   );
 }

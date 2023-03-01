@@ -29,10 +29,10 @@ export function CardComponent(props){
             }      
             else{
                 setSwitchEnroll("Enroll")
+
             }  
            })
-   
-      },[]);
+      },[courseid]);
 
     const handleSubmit = (e) =>{
         const id = {sid,courseid}
@@ -50,6 +50,7 @@ export function CardComponent(props){
                 setSwitchEnroll("Unenroll");
                 message.success("success")
             }else{
+                
                 message.error("something wrong")
             }
            })
@@ -72,24 +73,21 @@ export function CardComponent(props){
         }
          
     }
-    
     return(
         <Card className="dashboard-card">
             <div className='container-card'>
             <h2>{props.coursename}</h2>
             <h4>{props.courseid}</h4>
             <h4>{props.name}</h4>
-            {
-                ((new Date() - new Date(props.startdate)) > 0 )?
+            { 
+                (((new Date() - new Date(props.startdate)) > 0 ) && (switchEnroll === "Unenroll") )?
                 <Progress className='progerss' percent={precentageCal(new Date(props.startdate),new Date())}></Progress>:null
             }
-            
             <Button>Details</Button>
             {
                 ((new Date(props.startdate) - new Date() ) > 0 )?
                 <Button onClick={handleSubmit} htmlType="submit">{switchEnroll}</Button>:null
             }
-            
             </div> 
         </Card>
     )
