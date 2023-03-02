@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Table, Layout, Button } from "antd";
 import { Navbar } from "./Navbar";
+import { Link} from "react-router-dom";
 
 const columns = [
 
@@ -101,6 +102,11 @@ export const Teacher = () => {
           >
             View All Students
           </Button>
+          <Link to="/GetAllCourses">
+            <Button className="home-button" type="default" size="large">
+              <i>Get All Courses</i>
+            </Button>
+          </Link>
           {
             (initial===null)?
             <><h1>hello</h1></>

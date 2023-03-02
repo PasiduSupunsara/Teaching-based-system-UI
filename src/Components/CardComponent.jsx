@@ -103,7 +103,7 @@ export function CardComponent(props){
                 (((new Date() - new Date(props.startdate)) > 0 ) && (switchEnroll === "Unenroll") )?
                 <Progress className='progerss' percent={precentageCal(new Date(props.startdate),new Date())}></Progress>:null
             }
-            <Button onClick={handleClick}>Details</Button>
+            <Button onClick={handleClick}>GoTo Course</Button>
             {
                 ((new Date(props.startdate) - new Date() ) > 0 )?
                 <Button onClick={handleSubmit} htmlType="submit">{switchEnroll}</Button>:null

@@ -58,7 +58,7 @@ export const Login = (props) => {
                     <Input.Password value = {name} onChange={(e) => setPassword(e.target.value)} placeholder="Enter your password"/>
                 </Form.Item>
                 <Button type="primary" htmlType="submit" block >Login</Button>
-                <button className="link-btn" onClick={()=>navigate("/Register")}>Already have an account?<br/> Login here.</button>
+                <button className="link-btn" onClick={()=>navigate("/Register")}>You don't have an account?<br/> Register here.</button>
                 
            </Form>
            
