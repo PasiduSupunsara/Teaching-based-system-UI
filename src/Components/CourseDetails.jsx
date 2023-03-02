@@ -6,7 +6,12 @@ export function CourseDetails(){
     const navigate = useNavigate();
     const location = useLocation();
     const handleSbmit = (e) =>{
-        navigate("/GetAllCourses");
+        if(location.state.role === "TEACHER" || location.state.role === "ADMIN"){
+            navigate("/GetAllCourses");
+        }
+        else{
+            navigate("/Dashboard")
+        }
     }
 
     return(

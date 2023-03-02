@@ -92,11 +92,11 @@ export const Student = () => {
       {
         (mode === "All Courses")?
         <>{courses.map((course) => <CardComponent courseid={course.courseid} coursename={course.coursename} 
-        name={course.medium} startdate={course.startdate} id={tokenJson.id}/>)}
+        name={course.medium} startdate={course.startdate} id={tokenJson.id} role={tokenJson.role}/>)}
         </>
         :
         <>{coursesId.map((course) => <CardComponent courseid={course.courseid} coursename={course.coursename} 
-        name={course.medium} startdate={course.startdate} id={tokenJson.id}/>)}</>
+        name={course.medium} startdate={course.startdate} id={tokenJson.id} role={tokenJson.role}/>)}</>
       } 
     </Layout>
   );

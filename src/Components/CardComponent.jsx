@@ -48,9 +48,8 @@ export function CardComponent(props){
              body:JSON.stringify(id)
            }).then(res=>res.json())
            .then((result)=>{   
-            console.log(result.courseid) 
             navigate("/CourseDetails",{state: {courseid:result.courseid,coursename:result.coursename,details:result.description
-                ,duration:result.duration,fee:result.fee, startdate:result.startdate,medium:result.medium }})  
+                ,duration:result.duration,fee:result.fee, startdate:result.startdate,medium:result.medium,role:tokenJson.role }})  
            })
     }
 
