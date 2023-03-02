@@ -27,7 +27,7 @@ export const Login = (props) => {
                         id:result.uid
                     }))
                     message.success("Login succesful")
-                navigate("/Dashboard", {state: {}})
+                navigate("/Dashboard")
                   })
                 
               }
