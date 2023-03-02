@@ -47,12 +47,12 @@ const columns = [
 export const GetAllCourses = () => {
   let tokenJson = JSON.parse(localStorage.getItem('login'));
   const[course,setCourse] = useState([]);
-
+  const role = tokenJson.role
   const navigate = useNavigate();
 
   const handleRowClick = (result) => {
     navigate("/CourseDetails",{state: {courseid:result.courseid,coursename:result.coursename,details:result.description
-      ,duration:result.duration,fee:result.fee, startdate:result.startdate,medium:result.medium }})
+      ,duration:result.duration,fee:result.fee, startdate:result.startdate,medium:result.medium ,role:role}})
   };
   
 
@@ -82,7 +82,7 @@ export const GetAllCourses = () => {
           </div>
           <h2 style={{ color: "#591E66" }}>Courses</h2>
           <div>
-          <Table dataSource={course} columns={columns} onRow={(record) => {
+          <Table  dataSource={course} columns={columns} onRow={(record) => {
         return {
           onClick: () => handleRowClick(record)
         };

@@ -6,7 +6,7 @@ export function CourseDetails(){
     const navigate = useNavigate();
     const location = useLocation();
     const handleSbmit = (e) =>{
-        navigate("/Dashboard");
+        navigate("/GetAllCourses");
     }
 
     return(
@@ -20,6 +20,7 @@ export function CourseDetails(){
             <p>{location.state.fee}</p>
             <p>{location.state.startdate}</p>
             <p>{location.state.medium}</p>
+            <p>{location.state.role}</p>
             </div>
             
             <p>{location.state.courseid}</p>

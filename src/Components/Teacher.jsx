@@ -54,7 +54,6 @@ const columns = [
 
 export const Teacher = () => {
   const [students, setStudents] = useState([]);
-  const[initial,setInitial] = useState(null);
   const [selected, setSelected] = useState("users");
   let tokenJson = JSON.parse(localStorage.getItem('login'));
 
@@ -76,7 +75,6 @@ export const Teacher = () => {
 
   const handleStudentButtonClick = () => {
     setSelected("students");
-    setInitial("fill")
   };
 
 
@@ -103,17 +101,13 @@ export const Teacher = () => {
             View All Students
           </Button>
           <Link to="/GetAllCourses">
-            <Button className="home-button" type="default" size="large">
+            <Button className="home-button" type="primary" size="large">
               <i>Get All Courses</i>
             </Button>
           </Link>
-          {
-            (initial===null)?
-            <><h1>hello</h1></>
-            :
-            <><h2 style={{ color: "#591E66" }}>{tableTitle}</h2>
-            <Table dataSource={dataSource} columns={columns} /></>
-          }
+         <h2 style={{ color: "#591E66" }}>{tableTitle}</h2>
+        <Table dataSource={dataSource} columns={columns} />
+          
           
         </div>
       </Layout.Content>
