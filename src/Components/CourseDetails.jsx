@@ -26,6 +26,7 @@ export function CourseDetails(){
             <p>{location.state.startdate}</p>
             <p>{location.state.medium}</p>
             <p>{location.state.role}</p>
+            <p>{location.state.mode}</p>
             </div>
             
             <p>{location.state.courseid}</p>

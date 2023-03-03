@@ -15,8 +15,6 @@ export function CardComponent(props){
         const val = (((date - startDate)/ (1000 * 60 * 60 * 24))/(6*30))*100;
         return Math.round(val)
     }
-
-
     useEffect(()=>{
         const id = {sid,courseid}
         let token = "Bearer "+ tokenJson.accessToken;
@@ -49,7 +47,7 @@ export function CardComponent(props){
            }).then(res=>res.json())
            .then((result)=>{   
             navigate("/CourseDetails",{state: {courseid:result.courseid,coursename:result.coursename,details:result.description
-                ,duration:result.duration,fee:result.fee, startdate:result.startdate,medium:result.medium,role:tokenJson.role }})  
+                ,duration:result.duration,fee:result.fee, startdate:result.startdate,medium:result.medium,role:tokenJson.role,mode:props.state}})  
            })
     }
 

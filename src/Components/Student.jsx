@@ -5,6 +5,8 @@ import { Navbar } from "./Navbar";
 import {CardComponent} from './CardComponent'
 import {useState,useEffect} from 'react'
 import { Input, Space } from 'antd';
+
+
 const { Search } = Input;
 
 const columns = [
@@ -35,6 +37,7 @@ export const Student = () => {
 
   const onSearch = (value) => console.log(value);
 
+  
 
   useEffect(()=>{
     const sid = {id}
@@ -48,7 +51,6 @@ export const Student = () => {
       .then(res=>res.json())
       .then((result)=>{
       setCoursesId(result)
-      console.log(coursesId)
       }) 
       fetch("http://localhost:8080/student/getAllCourses",{
         method:"GET",
@@ -69,6 +71,7 @@ export const Student = () => {
       setMode("All Courses")
     }   
   }
+
   return (
     <Layout>
       <Layout.Header>
@@ -88,15 +91,16 @@ export const Student = () => {
         <Search placeholder="input search text" allowClear enterButton="Search" size="middle" onSearch={onSearch}/>
       </Space>
       <Button onClick={handleSubmit}>Switch    :  {mode}</Button>
-      
       {
         (mode === "All Courses")?
-        <>{courses.map((course) => <CardComponent courseid={course.courseid} coursename={course.coursename} 
-        name={course.medium} startdate={course.startdate} id={tokenJson.id} role={tokenJson.role}/>)}
-        </>
-        :
         <>{coursesId.map((course) => <CardComponent courseid={course.courseid} coursename={course.coursename} 
-        name={course.medium} startdate={course.startdate} id={tokenJson.id} role={tokenJson.role}/>)}</>
+        name={course.medium} startdate={course.startdate} id={tokenJson.id} state={mode}/>)}</>
+        :
+        <>{courses.map((course) => <CardComponent courseid={course.courseid} coursename={course.coursename} 
+        name={course.medium} startdate={course.startdate} id={tokenJson.id} state={mode}/>)}
+        </>
+        
+        
       } 
     </Layout>
   );
