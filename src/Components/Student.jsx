@@ -93,14 +93,13 @@ export const Student = () => {
       <Button onClick={handleSubmit}>Switch    :  {mode}</Button>
       {
         (mode === "All Courses")?
-        <>{coursesId.map((course) => <CardComponent courseid={course.courseid} coursename={course.coursename} 
-        name={course.medium} startdate={course.startdate} id={tokenJson.id} state={mode}/>)}</>
-        :
         <>{courses.map((course) => <CardComponent courseid={course.courseid} coursename={course.coursename} 
-        name={course.medium} startdate={course.startdate} id={tokenJson.id} state={mode}/>)}
+        name={course.medium} startdate={course.startdate} id={tokenJson.id}/>)}
         </>
-        
-        
+        :
+        <>{coursesId.map((course) => <CardComponent courseid={course.courseid} coursename={course.coursename} 
+        name={course.medium} startdate={course.startdate} id={tokenJson.id}/>)}</>
+
       } 
     </Layout>
   );
