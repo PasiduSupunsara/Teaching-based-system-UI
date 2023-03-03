@@ -1,10 +1,11 @@
 import React from "react";
-import { Table,Layout, Button} from "antd";
+import { Table,Layout} from "antd";
 import "./Dashboard";
 import { Navbar } from "./Navbar";
 import {CardComponent} from './CardComponent'
 import {useState,useEffect} from 'react'
 import { Input, Space } from 'antd';
+import { Select } from 'antd';
 
 
 const { Search } = Input;
@@ -35,10 +36,6 @@ export const Student = () => {
   let token = "Bearer "+ tokenJson.accessToken; 
   const id = tokenJson.id
 
-  const onSearch = (value) => console.log(value);
-
-  
-
   useEffect(()=>{
     const sid = {id}
       fetch('http://localhost:8080/student/findAllCoursesById',{
@@ -52,6 +49,14 @@ export const Student = () => {
       .then((result)=>{
       setCoursesId(result)
       }) 
+  },[]);
+
+
+  const onChange = (value) => {
+    if(value === "Enrolled Courses"){
+      setMode("Enrolled Course")
+    }
+    else if(value === "All Courses"){ 
       fetch("http://localhost:8080/student/getAllCourses",{
         method:"GET",
         headers:{"Authorization":token
@@ -61,16 +66,13 @@ export const Student = () => {
       .then((result)=>{
       setCourses(result);
       })   
-  },[]);
-
-  const handleSubmit = (e) =>{
-    if(mode === "All Courses"){
-      setMode("Enrolled Course")
-    }
-    else{ 
       setMode("All Courses")
     }   
-  }
+  };
+
+  const onSearch = (value) => {
+    console.log('search:', value);
+  };
 
   return (
     <Layout>
@@ -87,10 +89,31 @@ export const Student = () => {
           />
         </div>
       </Layout.Content>
-      <Space direction="vertical">
-        <Search placeholder="input search text" allowClear enterButton="Search" size="middle" onSearch={onSearch}/>
-      </Space>
-      <Button onClick={handleSubmit}>Switch    :  {mode}</Button>
+      <text>Course Overview</text>
+      <div>
+        <Space direction="vertical">
+          <Search placeholder="Filter my courses" allowClear enterButton="Search" size="middle" onSearch={onSearch}/>
+        </Space>
+        <br/>
+        <Select
+          showSearch
+          placeholder="Select your option"
+          onChange={onChange}
+          filterOption={(input, option) =>
+            (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+          }
+          options={[
+            {
+              value: 'All Courses',
+              label: 'All Courses',
+            },
+            {
+              value: 'Enrolled Course',
+              label: 'Enroll Courses',
+            },
+          ]} />
+    </div>
+      
       {
         (mode === "All Courses")?
         <>{courses.map((course) => <CardComponent courseid={course.courseid} coursename={course.coursename} 
@@ -102,5 +125,6 @@ export const Student = () => {
 
       } 
     </Layout>
+  
   );
 }

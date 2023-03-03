@@ -1,116 +1,144 @@
-import React, { useState, useEffect } from "react";
-import { Table, Layout, Button } from "antd";
+import React from "react";
+import { Table,Layout} from "antd";
+import "./Dashboard";
 import { Navbar } from "./Navbar";
-import { Link} from "react-router-dom";
+import {CardComponent} from './CardComponent'
+import {useState,useEffect} from 'react'
+import { Input, Space } from 'antd';
+import { Select } from 'antd';
+
+
+const { Search } = Input;
 
 const columns = [
-
   {
-    title: "First Name",
-    dataIndex: "firstName",
-    key: "firstName",
+    title: "Course",
+    dataIndex: "Course",
+    key: "Course",
   },
   {
-    title: "Last Name",
-    dataIndex: "lastName",
-    key: "lastName",
+    title: "DueDate",
+    dataIndex: "DueDate",
+    key: "DueDate",
   },
   {
-    title: "User Name",
-    dataIndex: "name",
-    key: "username",
-  },
-  {
-    title: "Birthday",
-    dataIndex: "dateOfBirth",
-    key: "Birthday",
-  },
-  {
-    title: "Phone number",
-    dataIndex: "phoneNumber",
-    key: "Phone Number",
-  },
-  {
-    title: "Email",
-    dataIndex: "email",
-    key: "email",
-  },
-  {
-    title: "ID number",
-    dataIndex: "idNumber",
-    key: "ID number",
-  },
-  {
-    title: "Address",
-    dataIndex: "address",
-    key: "Address",
-  },
-  {
-    title: "Role",
-    dataIndex: "role",
-    key: "Role",
+    title: "Homework",
+    dataIndex: "Homework",
+    key: "Homework",
   },
 ];
 
 export const Teacher = () => {
-  const [students, setStudents] = useState([]);
-  const [selected, setSelected] = useState("users");
+  const [courses, setCourses] = useState([]);
+  const [coursesId, setCoursesId] = useState([]);
+  const [mode,setMode] = useState("Enrolled Courses")
   let tokenJson = JSON.parse(localStorage.getItem('login'));
+  let token = "Bearer "+ tokenJson.accessToken; 
+  const id = tokenJson.id
 
   useEffect(()=>{
-    let token = "Bearer "+ tokenJson.accessToken;  
-      fetch("http://localhost:8080/teacher/getAllStudent",{
+    const sid = {id}
+      fetch('http://localhost:8080/teacher/findAllCoursesById',{
+      method:"POST",
+      headers:{"Content-Type":"application/json",
+      "Authorization":token
+      },
+      body:JSON.stringify(sid)
+      })
+      .then(res=>res.json())
+      .then((result)=>{
+        console.log(result)
+      setCoursesId(result)
+      }) 
+  },[]);
+
+
+  const onChange = (value) => {
+    if(value === "Enrolled Courses"){
+      const sid = {id}
+      fetch('http://localhost:8080/teacher/findAllCoursesById',{
+      method:"POST",
+      headers:{"Content-Type":"application/json",
+      "Authorization":token
+      },
+      body:JSON.stringify(sid)
+      })
+      .then(res=>res.json())
+      .then((result)=>{
+        console.log(result)
+      setCoursesId(result)
+      }) 
+      setMode("Enrolled Course")
+    }
+    else if(value === "All Courses"){ 
+      fetch("http://localhost:8080/teacher/getAllCourses",{
         method:"GET",
         headers:{"Authorization":token
           },
       })
       .then(res=>res.json())
       .then((result)=>{
-      setStudents(result);
-      }
-      )
-  },[]);
-
-
-
-  const handleStudentButtonClick = () => {
-    setSelected("students");
+      setCourses(result);
+      })   
+      setMode("All Courses")
+    }   
   };
 
-
-  let dataSource;
-  let tableTitle;
-  if (selected === "students") {
-    dataSource = students;
-    tableTitle = "List of Students";
-  } 
+  const onSearch = (value) => {
+    console.log('search:', value);
+  };
 
   return (
     <Layout>
       <Layout.Header>
-        < Navbar/>
+        <Navbar />
       </Layout.Header>
       <Layout.Content>
-        <div style={{ padding: " 50px" }}>
-          <Button
-            className="home-button"
-            type="primary"
-            size="large"
-            onClick={handleStudentButtonClick}
-          >
-            View All Students
-          </Button>
-          <Link to="/GetAllCourses">
-            <Button className="home-button" type="primary" size="large">
-              <i>Get All Courses</i>
-            </Button>
-          </Link>
-         <h2 style={{ color: "#591E66" }}>{tableTitle}</h2>
-        <Table dataSource={dataSource} columns={columns} />
-          
-          
+        <div style={{ padding: "50px" }}>
+         
+          <Table
+            style={{ borderBlockEndWidth: "5px", marginTop: 50 }}
+            dataSource={""}
+            columns={columns}
+          />
         </div>
       </Layout.Content>
+      <text>Course Overview</text>
+      <div>
+        <Space direction="vertical">
+          <Search placeholder="Filter my courses" allowClear enterButton="Search" size="middle" onSearch={onSearch}/>
+        </Space>
+        <br/>
+        <Select
+          showSearch
+          placeholder="Select your option"
+          onChange={onChange}
+          filterOption={(input, option) =>
+            (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+          }
+          options={[
+            {
+              value: 'All Courses',
+              label: 'All Courses',
+            },
+            {
+              value: 'Enrolled Course',
+              label: 'Enroll Courses',
+            },
+          ]} />
+    </div>
+      
+      {
+        (mode === "All Courses")?
+        <>{courses.map((course) => <CardComponent courseid={course.courseid} coursename={course.coursename} 
+        name={course.medium} startdate={course.startdate} id={tokenJson.id}/>)}
+        </>
+        :
+        <>{coursesId.map((course) => <CardComponent courseid={course.courseid} coursename={course.coursename} 
+        name={course.medium} startdate={course.startdate} id={tokenJson.id}/>)}</>
+
+      } 
     </Layout>
+  
   );
 }

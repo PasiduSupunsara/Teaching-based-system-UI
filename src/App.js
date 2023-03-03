@@ -17,7 +17,6 @@ import { GetAllCourses } from './Components/GetAllCourses'
 import {GetCourseById} from './Components/GetCoureseById'
 import { CourseDetails } from './Components/CourseDetails';
 
-
 function App(){
   return (  
     <div className="App" >
@@ -38,8 +37,6 @@ function App(){
       <Route path="/GetAllCourses" element={<GetAllCourses/>}/>
       <Route path="/GetCourseById" element={<GetCourseById/>}/>
       <Route path="/CourseDetails" element={<CourseDetails/>}/>
-      
-
       </Routes>
       </BrowserRouter>
     </div> 

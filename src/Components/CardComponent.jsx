@@ -38,7 +38,7 @@ export function CardComponent(props){
     const handleClick = (e) => {
         let id = courseid
         let token = "Bearer "+ tokenJson.accessToken;
-        fetch('http://localhost:8080/student/findByCourseId',{
+        fetch('http://localhost:8080/common/findByCourseId',{
              method:"POST",
              headers:{"Content-Type":"application/json",
              "Authorization":token
