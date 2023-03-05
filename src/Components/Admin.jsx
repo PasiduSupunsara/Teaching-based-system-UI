@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Table, Layout, Button } from "antd";
 import { Link} from "react-router-dom";
 import { Navbar } from "./Navbar";
+import { useNavigate} from "react-router-dom";
 
 
 
@@ -61,6 +62,14 @@ export const Admin = () => {
   const [users, setUsers] = useState([]);
   const [selected, setSelected] = useState(null);
   let tokenJson = JSON.parse(localStorage.getItem('login'));
+  const navigate = useNavigate();
+
+  const handleRowClick = (result) => {
+    navigate("/UserDetails",{state: {name:result.name,id:result.idNumber,birthday:result.dateOfBirth,address:result.address,
+      email:result.email,phoneNumber:result.phoneNumber,role:result.role,firstName:result.firstName,lastName:result.lastName
+    }})
+
+  };
 
   useEffect(()=>{
     let token = "Bearer "+ tokenJson.accessToken;
@@ -206,7 +215,11 @@ export const Admin = () => {
           </div>
           <h2 style={{ color: "#591E66" }}>{tableTitle}</h2>
           <div>
-          <Table dataSource={dataSource} columns={columns} pagination={{pageSize:10,}}/>
+          <Table dataSource={dataSource} columns={columns} pagination={{pageSize:10,}} onRow={(record) => {
+        return {
+          onClick: () => handleRowClick(record)
+        };
+      }}/>
         </div>
       </Layout.Content>
     </Layout>

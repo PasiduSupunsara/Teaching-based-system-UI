@@ -37,24 +37,6 @@ export const Teacher = () => {
   const id = tokenJson.id
 
   useEffect(()=>{
-    const sid = {id}
-      fetch('http://localhost:8080/teacher/findAllCoursesById',{
-      method:"POST",
-      headers:{"Content-Type":"application/json",
-      "Authorization":token
-      },
-      body:JSON.stringify(sid)
-      })
-      .then(res=>res.json())
-      .then((result)=>{
-        console.log(result)
-      setCoursesId(result)
-      }) 
-  },[]);
-
-
-  const onChange = (value) => {
-    if(value === "Enrolled Courses"){
       const sid = {id}
       fetch('http://localhost:8080/teacher/findAllCoursesById',{
       method:"POST",
@@ -65,9 +47,14 @@ export const Teacher = () => {
       })
       .then(res=>res.json())
       .then((result)=>{
-        console.log(result)
       setCoursesId(result)
       }) 
+  },[]);
+
+
+  const onChange = (value) => {
+    if(value === "Enrolled Course"){
+      setCourses([]);
       setMode("Enrolled Course")
     }
     else if(value === "All Courses"){ 
@@ -103,8 +90,8 @@ export const Teacher = () => {
           />
         </div>
       </Layout.Content>
-      <text>Course Overview</text>
       <div>
+      <h1>Course Overview</h1>
         <Space direction="vertical">
           <Search placeholder="Filter my courses" allowClear enterButton="Search" size="middle" onSearch={onSearch}/>
         </Space>
@@ -126,6 +113,7 @@ export const Teacher = () => {
               label: 'Enroll Courses',
             },
           ]} />
+          
     </div>
       
       {

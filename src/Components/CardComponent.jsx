@@ -15,10 +15,12 @@ export function CardComponent(props){
         const val = (((date - startDate)/ (1000 * 60 * 60 * 24))/(6*30))*100;
         return Math.round(val)
     }
+
     useEffect(()=>{
         const id = {sid,courseid}
         let token = "Bearer "+ tokenJson.accessToken;
-        fetch('http://localhost:8080/student/CountCourseStudent',{
+        if(tokenJson.role === "STUDENT"){
+            fetch('http://localhost:8080/student/CountCourseStudent',{
              method:"POST",
              headers:{"Content-Type":"application/json",
              "Authorization":token
@@ -33,6 +35,25 @@ export function CardComponent(props){
 
             }  
            })
+        }
+        else if(tokenJson.role === "TEACHER"){
+            let tid = sid;
+            const id = {tid,courseid}
+            fetch('http://localhost:8080/teacher/CountCourseTeacher',{
+             method:"POST",
+             headers:{"Content-Type":"application/json",
+             "Authorization":token
+            },
+             body:JSON.stringify(id)
+           }).then(res=>res.json()).then((result)=>{
+            if (result === 1){
+                setSwitchEnroll("Unenroll");
+            }      
+            else{
+                setSwitchEnroll("Enroll")
+            }  
+           })
+        }
       },[courseid]);
 
     const handleClick = (e) => {
@@ -56,37 +77,83 @@ export function CardComponent(props){
         let token = "Bearer "+ tokenJson.accessToken;
         const mapcoursestudent= {id}
         if(switchEnroll === "Enroll"){
-            fetch('http://localhost:8080/student/mapStudentCourse',{
+            if(tokenJson.role === "STUDENT"){
+             fetch('http://localhost:8080/student/mapStudentCourse',{
              method:"POST",
              headers:{"Content-Type":"application/json",
              "Authorization":token
-            },
-             body:JSON.stringify(mapcoursestudent)
-           }).then((response)=>{  
-            if (response.status === 200){
-                setSwitchEnroll("Unenroll");
-                message.success("success")
-            }else{
-                
-                message.error("something wrong")
+                },
+                body:JSON.stringify(mapcoursestudent)
+            }).then((response)=>{  
+                if (response.status === 200){
+                    setSwitchEnroll("Unenroll");
+                    message.success("success")
+                }else{
+                    
+                    message.error("something wrong")
+                }
+            })
             }
-           })
-        }
-        else if(switchEnroll === "Unenroll"){
-            fetch('http://localhost:8080/student/deleteMappingstudentcourse',{
-             method:"DELETE",
+            else if(tokenJson.role === "TEACHER"){
+            let tid = sid;
+            const id = {tid,courseid}
+            const mapcourseteacher= {id}
+            fetch('http://localhost:8080/teacher/mapTeacherCourse',{
+             method:"POST",
              headers:{"Content-Type":"application/json",
              "Authorization":token
-            },
-             body:JSON.stringify(id)
-           }).then((response)=>{  
-            if (response.status === 200){
-                setSwitchEnroll("Enroll");
-                message.success("success")
-            }else{
-                message.error("something wrong")
+                },
+                body:JSON.stringify(mapcourseteacher)  
+            }).then((response)=>{  
+                if (response.status === 200){
+                    setSwitchEnroll("Unenroll");
+                    message.success("success")
+                }else{
+                    
+                    message.error("something wrong")
+                }
+            })
+
             }
-           })
+            
+        }
+        else if(switchEnroll === "Unenroll"){
+            if(tokenJson.role === "STUDENT"){
+                fetch('http://localhost:8080/student/deleteMappingstudentcourse',{
+                method:"DELETE",
+                headers:{"Content-Type":"application/json",
+                "Authorization":token
+                },
+                body:JSON.stringify(id)
+            }).then((response)=>{  
+                if (response.status === 200){
+                    setSwitchEnroll("Enroll");
+                    message.success("success")
+                }else{
+                    message.error("something wrong")
+                }
+            })
+                }
+            else if(tokenJson.role === "TEACHER"){
+                let tid = sid;
+                const id = {tid,courseid}
+                fetch('http://localhost:8080/teacher/deleteMappingteachercourse',{
+                method:"DELETE",
+                headers:{"Content-Type":"application/json",
+                "Authorization":token
+                },
+                body:JSON.stringify(id)
+            }).then((response)=>{  
+                if (response.status === 200){
+                    setSwitchEnroll("Enroll");
+                    message.success("success")
+                }else{
+                    message.error("something wrong")
+                }
+            })
+
+            }
+            
         }
          
     }

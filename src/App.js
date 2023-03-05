@@ -16,6 +16,7 @@ import {CreateNewCourse} from './Components/CreateNewCourse'
 import { GetAllCourses } from './Components/GetAllCourses'
 import {GetCourseById} from './Components/GetCoureseById'
 import { CourseDetails } from './Components/CourseDetails';
+import { UserDetails } from './Components/UserDetails';
 
 function App(){
   return (  
@@ -37,6 +38,7 @@ function App(){
       <Route path="/GetAllCourses" element={<GetAllCourses/>}/>
       <Route path="/GetCourseById" element={<GetCourseById/>}/>
       <Route path="/CourseDetails" element={<CourseDetails/>}/>
+      <Route path="/UserDetails" element={<UserDetails/>}/>
       </Routes>
       </BrowserRouter>
     </div> 

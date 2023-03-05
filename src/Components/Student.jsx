@@ -53,7 +53,8 @@ export const Student = () => {
 
 
   const onChange = (value) => {
-    if(value === "Enrolled Courses"){
+    if(value === "Enrolled Course"){
+      setCourses([]);
       setMode("Enrolled Course")
     }
     else if(value === "All Courses"){ 
@@ -89,8 +90,8 @@ export const Student = () => {
           />
         </div>
       </Layout.Content>
-      <text>Course Overview</text>
       <div>
+      <h1>Course Overview</h1>
         <Space direction="vertical">
           <Search placeholder="Filter my courses" allowClear enterButton="Search" size="middle" onSearch={onSearch}/>
         </Space>
@@ -112,6 +113,8 @@ export const Student = () => {
               label: 'Enroll Courses',
             },
           ]} />
+
+
     </div>
       
       {

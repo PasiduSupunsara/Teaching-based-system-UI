@@ -149,3 +149,9 @@ button {
   width: 95%;
   top: 10px;
 }
+
+.details{
+  position: fixed;
+  top: 100px;
+  left: 0;
+}
