@@ -2,6 +2,9 @@ import { Table, Button } from "antd";
 import { useState ,useEffect} from "react";
 import { useNavigate, useLocation} from "react-router-dom";
 import { Navbar } from "./Navbar";
+import { Submission } from "./Submission";
+import {CreateAssesment} from "./CreateAssesment"
+import {DownOutlined, UpOutlined} from '@ant-design/icons';
 
 
 const columns = [
@@ -56,7 +59,9 @@ export function CourseDetails(){
     let tokenJson = JSON.parse(localStorage.getItem('login'));
     const navigate = useNavigate();
     const location = useLocation();
+    const[count,setCount]=useState(0);
     const[student, setStudent] = useState([]);
+    const[assesment,setAssesment] = useState([]);
     const[showStudent,setShowStudent]=useState("Show Students");
     const handleSbmit = (e) =>{
         if(location.state.role === "TEACHER" || location.state.role === "ADMIN"){
@@ -69,6 +74,22 @@ export function CourseDetails(){
 
     const getStudent = (e) => {
         if(showStudent === "Show Students"){
+          if(location.state.role==="TEACHER" || location.state.role==="ADMIN"){
+            let token = "Bearer "+ tokenJson.accessToken;
+            const id = location.state.courseid;
+            const cid = {id}
+              fetch("http://localhost:8080/getAllStudentForCourse",{
+                method:"POST",
+                headers:{"Content-Type":"application/json",
+                 "Authorization":token
+                },
+                 body:JSON.stringify(cid)
+              })
+              .then(res=>res.json())
+              .then((result)=>{
+                setStudent(result) 
+              }) 
+          }
             setShowStudent("Hide Students");
         }
         else if(showStudent === "Hide Students"){
@@ -81,7 +102,8 @@ export function CourseDetails(){
         let token = "Bearer "+ tokenJson.accessToken;
         const id = location.state.courseid;
         const cid = {id}
-          fetch("http://localhost:8080/teacher/getAllStudentForCourse",{
+        console.log(cid)
+          fetch("http://localhost:8080/getAllAssesmentByCid",{
             method:"POST",
             headers:{"Content-Type":"application/json",
              "Authorization":token
@@ -90,10 +112,10 @@ export function CourseDetails(){
           })
           .then(res=>res.json())
           .then((result)=>{
-            setStudent(result)
-          }
-          )  
-      },[]);
+            setCount(count+1)
+            setAssesment(result) 
+          }) 
+      },[count]);
     
 
     const handleRowClick = (result) => {
@@ -115,10 +137,31 @@ export function CourseDetails(){
             <p>{location.state.medium}</p>
             <p>{location.state.role}</p>
             <p>{location.state.enroll}</p>
-            <Button onClick={getStudent}>{showStudent}</Button>
             {
-                (location.state.role==="TEACHER")?
-                <>{
+              (tokenJson.role === "STUDENT" || tokenJson.role === "TEACHER")?
+              <>
+              <h1 className="coursedetailsheader">------------ASSESMENT------------</h1>
+              <>{assesment.map((asses) => <Submission Details={asses.details} AssesmentName={asses.assesmentname}/>)}
+              </>
+              </>
+              :
+              null
+            }
+            {
+              (tokenJson.role === "TEACHER")?
+              <>
+              <h1 className="coursedetailsheader">------------CREATE NEW ASSESMENT------------</h1>
+              <CreateAssesment cid={location.state.courseid}/>
+              </>
+              :
+              null
+            }
+            {
+                (location.state.role==="TEACHER"||location.state.role==="ADMIN")?
+                <>
+                <h1 className="coursedetailsheader">------------STUDENT SUMMARY------------</h1>
+                <Button onClick={getStudent}>{showStudent}&nbsp;{(showStudent === "Show Students")?<> <DownOutlined /></>:<> <UpOutlined /></>}</Button>
+                {
                     (showStudent === "Hide Students")?
                     <>
                     <div className="table">
@@ -132,13 +175,19 @@ export function CourseDetails(){
 
                     :
                     null
-                  }
-                    
+                  }  
                 </>
                 :
                 null
             }
             <br/>
+            {
+                (location.state.role==="TEACHER")?
+                <>
+                </>
+                :
+                null
+            }
             <Button onClick={handleSbmit}>Back</Button>
             </div>
            

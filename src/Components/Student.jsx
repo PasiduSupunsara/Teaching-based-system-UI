@@ -32,6 +32,7 @@ export const Student = () => {
   const [courses, setCourses] = useState([]);
   const [coursesId, setCoursesId] = useState([]);
   const [mode,setMode] = useState("Enrolled Courses")
+  const [count,setCount]= useState(0);
   let tokenJson = JSON.parse(localStorage.getItem('login'));
   let token = "Bearer "+ tokenJson.accessToken; 
   const id = tokenJson.id
@@ -48,14 +49,16 @@ export const Student = () => {
       .then(res=>res.json())
       .then((result)=>{
       setCoursesId(result)
+      setCount(count + 1)
       }) 
-  },[]);
+  },[count]);
 
 
   const onChange = (value) => {
     if(value === "Enrolled Course"){
       setCourses([]);
       setMode("Enrolled Course")
+      setCount(count + 1)
     }
     else if(value === "All Courses"){ 
       fetch("http://localhost:8080/student/getAllCourses",{
@@ -68,6 +71,7 @@ export const Student = () => {
       setCourses(result);
       })   
       setMode("All Courses")
+      setCount(count + 1)
     }   
   };
 

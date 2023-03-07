@@ -53,16 +53,17 @@ export function UserDetails(){
     }
 
     const getCourses = (e) => {
+      if(location.state.role=== "STUDENT"){
         if(showCourses === "Show Courses"){
-            let token = "Bearer "+ tokenJson.accessToken;
-            const name = location.state.name;
-            const sname = {name}
-            fetch("http://localhost:8080/admin/findAllCoursesById",{
-                method:"POST",
-                headers:{"Content-Type":"application/json",
-                "Authorization":token
-                },
-                body:JSON.stringify(sname)
+          let token = "Bearer "+ tokenJson.accessToken;
+          const name = location.state.name;
+          const sname = {name}
+          fetch("http://localhost:8080/admin/findAllCoursesById",{
+              method:"POST",
+              headers:{"Content-Type":"application/json",
+              "Authorization":token
+              },
+              body:JSON.stringify(sname)
             })
             .then(res=>res.json())
             .then((result)=>{
@@ -74,16 +75,37 @@ export function UserDetails(){
         else if(showCourses === "Hide Courses"){
             setShowCourses("Show Courses");
         }
+      }
+      else if(location.state.role=== "TEACHER"){
+        if(showCourses === "Show Courses"){
+          let token = "Bearer "+ tokenJson.accessToken;
+          const name = location.state.name;
+          const sname = {name}
+          fetch("http://localhost:8080/admin/findAllCoursesByTId",{
+              method:"POST",
+              headers:{"Content-Type":"application/json",
+              "Authorization":token
+              },
+              body:JSON.stringify(sname)
+            })
+            .then(res=>res.json())
+            .then((result)=>{
+                setCourse(result)
+            }
+            )  
+            setShowCourses("Hide Courses");
+          }
+          else if(showCourses === "Hide Courses"){
+              setShowCourses("Show Courses");
+          }
+      }
+        
     }
 
     return(
         <div>
             <Navbar/>
-
-            <p>{location.state.name}</p>
-            <p>{location.state.name}</p>
-            <p>{location.state.name}</p>
-            <p>{location.state.name}</p>
+            <div className="details">
             <p>{location.state.name}</p>
             <p>{location.state.id}</p>
             <p>{location.state.birthday}</p>
@@ -106,7 +128,24 @@ export function UserDetails(){
                             <>
                                 <Table dataSource={course} columns={columns}/>
                             </>
-                            :null
+                            :
+                            null
+
+                        }
+                    </>
+                    :
+                    null
+                }
+                {
+                    (location.state.role === "TEACHER")?
+                    <>
+                        {
+                            (showCourses==="Hide Courses")?
+                            <>
+                                <Table dataSource={course} columns={columns}/>
+                            </>
+                            :
+                            null
 
                         }
                     </>
@@ -121,6 +160,7 @@ export function UserDetails(){
             }
             <br/>
             <Button onClick={handleSbmit}>Back</Button>
+            </div>
         </div>
     )
 }

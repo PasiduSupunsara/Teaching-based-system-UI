@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Table, Layout, Button } from "antd";
 import { Link} from "react-router-dom";
 import { Navbar } from "./Navbar";
@@ -63,6 +63,7 @@ export const Admin = () => {
   const [selected, setSelected] = useState(null);
   let tokenJson = JSON.parse(localStorage.getItem('login'));
   const navigate = useNavigate();
+  let token = "Bearer "+ tokenJson.accessToken;
 
   const handleRowClick = (result) => {
     navigate("/UserDetails",{state: {name:result.name,id:result.idNumber,birthday:result.dateOfBirth,address:result.address,
@@ -70,10 +71,11 @@ export const Admin = () => {
     }})
 
   };
+  
 
-  useEffect(()=>{
-    let token = "Bearer "+ tokenJson.accessToken;
-      fetch("http://localhost:8080/admin/getAllStudent",{
+
+  const handleStudentButtonClick = () => {
+    fetch("http://localhost:8080/admin/getAllStudent",{
         method:"GET",
         headers:{"Authorization":token
           },
@@ -83,7 +85,11 @@ export const Admin = () => {
       setStudents(result);
       }
       )
-      fetch("http://localhost:8080/admin/getAllTeachers",{
+    setSelected("students");
+  };
+
+  const handleTeacherButtonClick = () => {
+    fetch("http://localhost:8080/admin/getAllTeachers",{
         method:"GET",
         headers:{"Authorization":token
           },
@@ -93,17 +99,11 @@ export const Admin = () => {
       setTeachers(result);
       }
       )
-      fetch("http://localhost:8080/admin/getAllUsers",{
-        method:"GET",
-        headers:{"Authorization":token
-          },
-      })
-      .then(res=>res.json())
-      .then((result)=>{
-      setUsers(result);
-      }
-      ) 
-      fetch("http://localhost:8080/admin/getAllAdmins",{
+    setSelected("teachers");
+  };
+
+  const handleManagerButtonClick = () => {
+    fetch("http://localhost:8080/admin/getAllAdmins",{
         method:"GET",
         headers:{"Authorization":token
           },
@@ -113,23 +113,20 @@ export const Admin = () => {
       setAdmin(result);
       }
       )   
-  },[]);
-
-
-
-  const handleStudentButtonClick = () => {
-    setSelected("students");
-  };
-
-  const handleTeacherButtonClick = () => {
-    setSelected("teachers");
-  };
-
-  const handleManagerButtonClick = () => {
     setSelected("admin");
   };
 
   const handleUserButtonClick = () => {
+    fetch("http://localhost:8080/admin/getAllUsers",{
+        method:"GET",
+        headers:{"Authorization":token
+          },
+      })
+      .then(res=>res.json())
+      .then((result)=>{
+      setUsers(result);
+      }
+      ) 
     setSelected("users");
   };
 
@@ -191,24 +188,24 @@ export const Admin = () => {
           </Button>
 
           <Link to="/CreateNewCourse">
-            <Button className="home-button" type="default" size="large">
+            <Button className="home-button" type="primary" size="large">
               <i>Create course</i>
             </Button>
           </Link>
 
           <Link to="/GetAllCourses">
-            <Button className="home-button" type="default" size="large">
+            <Button className="home-button" type="primary" size="large">
               <i>Get All Courses</i>
             </Button>
           </Link>
 
           <Link to="/Update">
-            <Button className="home-button" type="default" size="large">
+            <Button className="home-button" type="primary" size="large">
               <i>Update Role</i>
             </Button>
           </Link>
           <Link to="/Delete">
-            <Button className="home-button" type="default" size="large">
+            <Button className="home-button" type="primary" size="large">
               <i>Delete User</i>
             </Button>
           </Link>
@@ -216,10 +213,10 @@ export const Admin = () => {
           <h2 style={{ color: "#591E66" }}>{tableTitle}</h2>
           <div>
           <Table dataSource={dataSource} columns={columns} pagination={{pageSize:10,}} onRow={(record) => {
-        return {
-          onClick: () => handleRowClick(record)
-        };
-      }}/>
+              return {
+                onClick: () => handleRowClick(record)
+              };
+            }}/>
         </div>
       </Layout.Content>
     </Layout>

@@ -14,9 +14,7 @@ export const Update = (props) => {
 
     const handleSubmit=(e)=>{
         const user={name,newRole,principalName}
-        console.log(user)
         let token = "Bearer "+ tokenJson.accessToken;
-        console.log(token);
         fetch('http://localhost:8080/admin/update',{
           method:"PUT",
           headers:{"Content-Type":"application/json",
