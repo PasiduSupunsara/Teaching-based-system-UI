@@ -2,6 +2,7 @@ import { Button, Table } from "antd";
 import { useState } from "react";
 import { useNavigate, useLocation} from "react-router-dom";
 import { Navbar } from "./Navbar";
+import {DownOutlined, UpOutlined} from '@ant-design/icons';
 
 const columns = [
     {
@@ -119,7 +120,7 @@ export function UserDetails(){
             {
                 (tokenJson.role === "ADMIN")?
                 <>
-                <Button onClick={getCourses}>{showCourses}</Button>
+                <Button onClick={getCourses}>{showCourses}&nbsp;{(showCourses === "Show Courses")?<> <DownOutlined /></>:<> <UpOutlined /></>}</Button>
                 {
                     (location.state.role === "STUDENT")?
                     <>

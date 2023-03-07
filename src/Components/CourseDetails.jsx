@@ -100,9 +100,9 @@ export function CourseDetails(){
 
     useEffect(()=>{
         let token = "Bearer "+ tokenJson.accessToken;
+        let principalid = tokenJson.id;
         const id = location.state.courseid;
-        const cid = {id}
-        console.log(cid)
+        const cid = {id,principalid}
           fetch("http://localhost:8080/getAllAssesmentByCid",{
             method:"POST",
             headers:{"Content-Type":"application/json",
@@ -138,7 +138,7 @@ export function CourseDetails(){
             <p>{location.state.role}</p>
             <p>{location.state.enroll}</p>
             {
-              (tokenJson.role === "STUDENT" || tokenJson.role === "TEACHER")?
+              ((tokenJson.role === "STUDENT" || tokenJson.role === "TEACHER") && location.state.enroll === "Unenroll")?
               <>
               <h1 className="coursedetailsheader">------------ASSESMENT------------</h1>
               <>{assesment.map((asses) => <Submission Details={asses.details} AssesmentName={asses.assesmentname}/>)}
@@ -148,7 +148,7 @@ export function CourseDetails(){
               null
             }
             {
-              (tokenJson.role === "TEACHER")?
+              ((tokenJson.role === "TEACHER")&& location.state.enroll === "Unenroll")?
               <>
               <h1 className="coursedetailsheader">------------CREATE NEW ASSESMENT------------</h1>
               <CreateAssesment cid={location.state.courseid}/>
@@ -157,7 +157,7 @@ export function CourseDetails(){
               null
             }
             {
-                (location.state.role==="TEACHER"||location.state.role==="ADMIN")?
+                ((location.state.role==="TEACHER" && location.state.enroll === "Unenroll")||location.state.role==="ADMIN")?
                 <>
                 <h1 className="coursedetailsheader">------------STUDENT SUMMARY------------</h1>
                 <Button onClick={getStudent}>{showStudent}&nbsp;{(showStudent === "Show Students")?<> <DownOutlined /></>:<> <UpOutlined /></>}</Button>
