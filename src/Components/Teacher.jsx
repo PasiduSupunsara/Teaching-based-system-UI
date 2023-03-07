@@ -86,7 +86,7 @@ export const Teacher = () => {
       </Layout.Header>
       <Layout.Content>
         <div style={{ padding: "50px" }}>
-         
+        <div><h1 className="heading">Time Line</h1></div>
           <Table
             style={{ borderBlockEndWidth: "5px", marginTop: 50 }}
             dataSource={""}
@@ -95,12 +95,13 @@ export const Teacher = () => {
         </div>
       </Layout.Content>
       <div>
-      <h1>Course Overview</h1>
-        <Space direction="vertical">
+      <h1 className="heading">Course Overview</h1>
+        <Space className="drop" direction="vertical">
           <Search placeholder="Filter my courses" allowClear enterButton="Search" size="middle" onSearch={onSearch}/>
         </Space>
         <br/>
         <Select
+          className="drop"
           showSearch
           placeholder="Select your option"
           onChange={onChange}

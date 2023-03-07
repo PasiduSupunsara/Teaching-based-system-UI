@@ -60,6 +60,7 @@ export function CourseDetails(){
     const navigate = useNavigate();
     const location = useLocation();
     const[count,setCount]=useState(0);
+    const[numberAss,setNumberAss] = useState(0);
     const[student, setStudent] = useState([]);
     const[assesment,setAssesment] = useState([]);
     const[showStudent,setShowStudent]=useState("Show Students");
@@ -112,8 +113,14 @@ export function CourseDetails(){
           })
           .then(res=>res.json())
           .then((result)=>{
-            setCount(count+1)
-            setAssesment(result) 
+            if(result.length === 0){
+              setNumberAss(1);
+            }
+            else{
+              setCount(count+1);
+              setAssesment(result);
+            }
+            
           }) 
       },[count]);
     
@@ -141,8 +148,13 @@ export function CourseDetails(){
               ((tokenJson.role === "STUDENT" || tokenJson.role === "TEACHER") && location.state.enroll === "Unenroll")?
               <>
               <h1 className="coursedetailsheader">------------ASSESMENT------------</h1>
-              <>{assesment.map((asses) => <Submission Details={asses.details} AssesmentName={asses.assesmentname}/>)}
-              </>
+              {
+                (numberAss === 0)?
+                <>{assesment.map((asses) => <Submission Details={asses.details} AssesmentName={asses.assesmentname}/>)}</>
+                :
+                <h4 className="subDetails">There is not assesment yet</h4>
+
+              }
               </>
               :
               null

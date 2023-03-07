@@ -169,7 +169,7 @@ button {
   height: 300px;
   margin-right: 100px;
   border-radius: 100;
-  background-color: #bef8e1;
+  background-color: #cbfae7;
   border-color: black;
 
 }
@@ -186,4 +186,15 @@ button {
 .coursedetailsheader{
   position: relative;
   text-align: center;
+}
+.subDetails{
+  text-align: center;
+  color: rgb(187, 112, 50);
+}
+.heading{
+  text-align: center;
+}
+.drop{
+  position: relative;
+  margin-left: 25px;
 }
