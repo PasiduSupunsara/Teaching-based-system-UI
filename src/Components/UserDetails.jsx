@@ -118,46 +118,20 @@ export function UserDetails(){
             <p>{location.state.lastName}</p>
             
             {
-                (tokenJson.role === "ADMIN")?
+                ((tokenJson.role === "ADMIN") &&  ((location.state.role === "STUDENT")||(location.state.role === "TEACHER")))?
                 <>
                 <Button onClick={getCourses}>{showCourses}&nbsp;{(showCourses === "Show Courses")?<> <DownOutlined /></>:<> <UpOutlined /></>}</Button>
                 {
-                    (location.state.role === "STUDENT")?
-                    <>
-                        {
                             (showCourses==="Hide Courses")?
                             <>
                                 <Table dataSource={course} columns={columns}/>
                             </>
                             :
                             null
-
                         }
-                    </>
-                    :
-                    null
-                }
-                {
-                    (location.state.role === "TEACHER")?
-                    <>
-                        {
-                            (showCourses==="Hide Courses")?
-                            <>
-                                <Table dataSource={course} columns={columns}/>
-                            </>
-                            :
-                            null
-
-                        }
-                    </>
-                    :
-                    null
-                }
                 </>
                 :
-                <>
-                good
-                </>
+                null
             }
             <br/>
             <Button onClick={handleSbmit}>Back</Button>
