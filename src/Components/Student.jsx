@@ -22,9 +22,9 @@ const columns = [
     key: "DueDate",
   },
   {
-    title: "Homework",
-    dataIndex: "Homework",
-    key: "Homework",
+    title: "Assesment",
+    dataIndex: "Assesment",
+    key: "Assesment",
   },
 ];
 

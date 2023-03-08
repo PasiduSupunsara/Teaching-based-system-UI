@@ -1,40 +1,32 @@
 import React from "react"
-import { Link,useNavigate } from "react-router-dom"
-import {Nav, NavDropdown} from 'react-bootstrap';
+import { Link } from "react-router-dom"
+import {MyNotification} from './MyNotification'
+import {UserProfile} from './UserProfile'
 
 export const Navbar = () => {
     const user = JSON.parse(localStorage.getItem('username'));
-    let navigate=useNavigate();
-    function logout(){
-        localStorage.clear();
-        navigate("/")
-    }
+   
     return(
         <nav className="navbar">
-            
-            <h3 className="logo">LEARNING MANAGEMENT SYSTEM</h3>
-            <ul className="nav-links">
+            <text className="notification">LEARNING MANAGEMENT SYSTEM</text>
+            <ul className="notification">
+                <Link to="/Home" className="link">Home</Link>
+                <Link to="/About"className="link">About</Link>
+                
                 {
                     user?
-                    null
+                    <>
+                    <Link to="/Dashboard"className="link">Dashboard</Link>
+                    <MyNotification />
+                    </>
                     :
-                    <><Link to="/">Login</Link>
-                    <Link to="/Register">Register</Link></>
+                    <><Link to="/"className="link">Login</Link>
+                    <Link to="/Register"className="link">Register</Link>
+                    </>
                 }
                 
-                <Link to="/Home">Home</Link>
-                <Link to="/About">About</Link>
-                <Link to="/Dashboard">Dashboard</Link>
             </ul>
-            <Nav className="nav">
-                {
-                    user?
-                    <NavDropdown className="profile" title={user}>
-                        <NavDropdown.Item onClick={logout}>Logout</NavDropdown.Item>
-                    </NavDropdown>:null
-                }
-                
-            </Nav>
+            <UserProfile/>
 
         </nav>
     )

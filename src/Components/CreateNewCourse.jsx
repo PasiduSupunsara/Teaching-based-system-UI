@@ -1,6 +1,6 @@
 import React,{useState} from "react"
 import { useNavigate } from "react-router-dom";
-import { Button, Form, Input, Typography } from "antd";
+import { Button, Form, Input, Typography ,Layout} from "antd";
 import {Navbar} from './Navbar'
 
 export const CreateNewCourse = (props) => {
@@ -35,9 +35,12 @@ export const CreateNewCourse = (props) => {
 
     }
     return (
-      <div>
-        <Navbar/>
-        <div className="appLog">
+    <Layout>
+      <Layout.Header>
+        <Navbar />
+      </Layout.Header>
+      <Layout.Content>
+      <div className="appLog">
            <Form className="loginForm" onFinish={handleSubmit}>
            <Typography.Title>Course Creation</Typography.Title>
                 <Form.Item rules={[{
@@ -95,6 +98,10 @@ export const CreateNewCourse = (props) => {
            </Form> 
            
         </div>
-        </div>
+      </Layout.Content>
+    </Layout>
+      
+        
+        
     )
 }

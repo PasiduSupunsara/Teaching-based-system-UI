@@ -1,6 +1,6 @@
 import React,{useState} from "react"
 import { useNavigate } from "react-router-dom"
-import { Button, Form, Input, message, Typography } from "antd";
+import { Button, Form, Input, message, Typography ,Layout} from "antd";
 import { Navbar } from "./Navbar";
 
 export const Login = (props) => {
@@ -40,9 +40,12 @@ export const Login = (props) => {
           })
         }
     return (
-        <div>
-            <Navbar/>
-        <div className="appLog">
+    <Layout>
+      <Layout.Header>
+        <Navbar />
+      </Layout.Header>
+      <Layout.Content>
+      <div className="appLog">
            <Form className="loginForm" onFinish={handleSubmit}>
            <Typography.Title>Welcome Back!</Typography.Title>
                 <Form.Item rules={[{
@@ -59,10 +62,9 @@ export const Login = (props) => {
                 </Form.Item>
                 <Button type="primary" htmlType="submit" block >Login</Button>
                 <button className="link-btn" onClick={()=>navigate("/Register")}>You don't have an account?<br/> Register here.</button>
-                
            </Form>
-           
         </div>
-        </div>
+      </Layout.Content>
+    </Layout>
     )
 }

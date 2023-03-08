@@ -1,8 +1,9 @@
-import { Button, Table } from "antd";
+import { Button, Table,Layout } from "antd";
 import { useState } from "react";
 import { useNavigate, useLocation} from "react-router-dom";
 import { Navbar } from "./Navbar";
 import {DownOutlined, UpOutlined} from '@ant-design/icons';
+import { UserCard } from "./UserCard";
 
 const columns = [
     {
@@ -104,22 +105,21 @@ export function UserDetails(){
     }
 
     return(
-        <div>
-            <Navbar/>
-            <div className="details">
-            <p>{location.state.name}</p>
-            <p>{location.state.id}</p>
-            <p>{location.state.birthday}</p>
-            <p>{location.state.address}</p>
-            <p>{location.state.email}</p>
-            <p>{location.state.phoneNumber}</p>
-            <p>{location.state.role}</p>
-            <p>{location.state.firstName}</p>
-            <p>{location.state.lastName}</p>
-            
+      <Layout>
+      <Layout.Header>
+        <Navbar />
+      </Layout.Header>
+      <Layout.Content>
+      <div className="details">
+      <h1 className="coursedetailsheader">------------USER DETAILS------------</h1>
+              <UserCard name={location.state.name} id={location.state.id} birthday={location.state.birthday} 
+              role={location.state.role} firstName={location.state.firstName} lastName={location.state.lastName}
+              address={location.state.address} email={location.state.email} phoneNumber={location.state.phoneNumber}/>
+           
             {
                 ((tokenJson.role === "ADMIN") &&  ((location.state.role === "STUDENT")||(location.state.role === "TEACHER")))?
                 <>
+                <h1 className="coursedetailsheader">------------COURSE SUMMARY------------</h1>
                 <Button onClick={getCourses}>{showCourses}&nbsp;{(showCourses === "Show Courses")?<> <DownOutlined /></>:<> <UpOutlined /></>}</Button>
                 {
                             (showCourses==="Hide Courses")?
@@ -136,6 +136,10 @@ export function UserDetails(){
             <br/>
             <Button onClick={handleSbmit}>Back</Button>
             </div>
-        </div>
+      </Layout.Content>
+    </Layout>
+        
+            
+        
     )
 }

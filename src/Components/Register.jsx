@@ -1,6 +1,6 @@
 import React,{useState} from "react"
 import { useNavigate } from "react-router-dom"
-import { Button, Form, Input, message, Typography } from "antd";
+import { Button, Form, Input, message, Typography,Layout } from "antd";
 import {Navbar} from './Navbar';
 
 
@@ -15,13 +15,7 @@ export const Register = (props) => {
     const [dateOfBirth, setDateOfBirth] = useState(null);
     const [idNumber, setIdNumber] = useState(null);
 
-
-
-
     let navigate=useNavigate();
-
-
-    
 
     const handleSubmit=(e)=>{
         const user={firstName,name,password,lastName,address,phoneNumber,email,dateOfBirth,idNumber}
@@ -79,9 +73,12 @@ export const Register = (props) => {
         })
         }
     return (
-        <div>
-            <Navbar/>
-        <div className="appLog">
+    <Layout>
+      <Layout.Header>
+        <Navbar />
+      </Layout.Header>
+      <Layout.Content>
+      <div className="appLog">
            <Form className="regForm" onFinish={handleSubmit}>
            <Typography.Title>Welcome Back!</Typography.Title>
            <Form.Item rules={[{
@@ -148,7 +145,11 @@ export const Register = (props) => {
                 <button className="link-btn" onClick={()=>navigate("/")}>Already have an account?<br/> Login here.</button>
             </Form>
         </div>
-        </div>
+      </Layout.Content>
+    </Layout>
+        
+        
+
     )
 }
 

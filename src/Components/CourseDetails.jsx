@@ -1,10 +1,11 @@
-import { Table, Button } from "antd";
+import { Table, Button,Layout } from "antd";
 import { useState ,useEffect} from "react";
 import { useNavigate, useLocation} from "react-router-dom";
 import { Navbar } from "./Navbar";
 import { Submission } from "./Submission";
 import {CreateAssesment} from "./CreateAssesment"
 import {DownOutlined, UpOutlined} from '@ant-design/icons';
+import { CourseCard } from "./CourseCard";
 
 
 const columns = [
@@ -132,18 +133,16 @@ export function CourseDetails(){
       };
 
     return(
-        <div>
-            <Navbar/>
-            <div className="details">
-            <p>{location.state.courseid}</p>
-            <p>{location.state.coursename}</p>
-            <p>{location.state.details}</p>
-            <p>{location.state.duration}</p>
-            <p>{location.state.fee}</p>
-            <p>{location.state.startdate}</p>
-            <p>{location.state.medium}</p>
-            <p>{location.state.role}</p>
-            <p>{location.state.enroll}</p>
+      <Layout>
+      <Layout.Header>
+        <Navbar />
+      </Layout.Header>
+      <Layout.Content>
+      <div className="details">
+      <h1 className="coursedetailsheader">------------COURSE DETAILS------------</h1>
+              <CourseCard name={location.state.coursename} id={location.state.courseid} details={location.state.details}
+              duration={location.state.duration} fee={location.state.fee} startdate={location.state.startdate}
+              medium={location.state.medium} enroll={location.state.enroll}/>
             {
               ((tokenJson.role === "STUDENT" || tokenJson.role === "TEACHER") && location.state.enroll === "Unenroll")?
               <>
@@ -184,7 +183,6 @@ export function CourseDetails(){
                         }}/>
                     </div>
                     </>
-
                     :
                     null
                   }  
@@ -202,8 +200,7 @@ export function CourseDetails(){
             }
             <Button onClick={handleSbmit}>Back</Button>
             </div>
-           
-        </div>
-        
+      </Layout.Content>
+    </Layout> 
     )
 }
