@@ -257,4 +257,15 @@ button {
   border-left: 1px solid gray;
   border-top: 1px solid gray;
 }
+.MessageCard{
+  margin: 50px;
+  font-size: larger;
+  width: auto;
+  height: 200px;
+  margin-right: 100px;
+  border-radius: 100;
+  background-color: #f5d4f5;
+  border-color: rgb(247, 210, 239);
+}
+
 

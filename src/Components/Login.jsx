@@ -7,10 +7,12 @@ export const Login = (props) => {
     const [name,setUserName] = useState('');
     const [password,setPassword] = useState('');
     let navigate=useNavigate();
+    const [form] = Form.useForm();
     
 
     const handleSubmit = (e) =>{
        const user = {name,password}
+       form.resetFields();
         fetch('http://localhost:8080/login',{
             method:"POST",
             headers:{"Content-Type":"application/json"},
@@ -46,7 +48,7 @@ export const Login = (props) => {
       </Layout.Header>
       <Layout.Content>
       <div className="appLog">
-           <Form className="loginForm" onFinish={handleSubmit}>
+           <Form className="loginForm" form={form} onFinish={handleSubmit}>
            <Typography.Title>Welcome Back!</Typography.Title>
                 <Form.Item rules={[{
                     required:true,

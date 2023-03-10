@@ -14,11 +14,13 @@ export const Register = (props) => {
     const [phoneNumber,setPhoneNumber] = useState(null);
     const [dateOfBirth, setDateOfBirth] = useState(null);
     const [idNumber, setIdNumber] = useState(null);
+    const [form] = Form.useForm();
 
     let navigate=useNavigate();
 
     const handleSubmit=(e)=>{
         const user={firstName,name,password,lastName,address,phoneNumber,email,dateOfBirth,idNumber}
+        form.resetFields();
         fetch('http://localhost:8080/signup',{
           method:"POST",
           headers:{"Content-Type":"application/json"
@@ -79,7 +81,7 @@ export const Register = (props) => {
       </Layout.Header>
       <Layout.Content>
       <div className="appLog">
-           <Form className="regForm" onFinish={handleSubmit}>
+           <Form className="regForm" form={form} onFinish={handleSubmit}>
            <Typography.Title>Welcome Back!</Typography.Title>
            <Form.Item rules={[{
                     required:true,

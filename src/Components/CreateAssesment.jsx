@@ -6,25 +6,28 @@ export const CreateAssesment = (props) => {
     const[duedate,setADueDate] = useState(null)
     const[assesmentname,setAssesmentname] = useState(null)
     const[details,setDetails] = useState(new Date())
+    const [form] = Form.useForm();
+
     let cid = props.cid;
     let tokenJson = JSON.parse(localStorage.getItem('login'));
 
+
+
     const handleSubmit=(e)=>{
         const assesment={assesmentname,details,cid,duedate}
-        console.log(assesment)
         let token = "Bearer "+ tokenJson.accessToken;
+        form.resetFields();
         fetch('http://localhost:8080/teacher/CreateNewAssesment',{
           method:"POST",
           headers:{"Content-Type":"application/json",
           "Authorization":token
         },
           body:JSON.stringify(assesment)
-        }).then((response)=>{
-        })
+        }).then(res=>res.json())
         }
     return (
         <Card >
-           <Form onFinish={handleSubmit}>
+           <Form form={form} onFinish={handleSubmit}>
             <Form.Item rules={[{
                     required:true,
                     message:"please enter Assesment Name"

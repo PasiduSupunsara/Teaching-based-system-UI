@@ -99,6 +99,9 @@ export function CourseDetails(){
         }
         
     }
+    const statecount=()=>{
+      setCount(count + 1);
+    }
 
     useEffect(()=>{
         let token = "Bearer "+ tokenJson.accessToken;
@@ -162,7 +165,7 @@ export function CourseDetails(){
               ((tokenJson.role === "TEACHER")&& location.state.enroll === "Unenroll")?
               <>
               <h1 className="coursedetailsheader">------------CREATE NEW ASSESMENT------------</h1>
-              <CreateAssesment cid={location.state.courseid}/>
+              <CreateAssesment cid={location.state.courseid} onClick={statecount} count={count}/>
               </>
               :
               null

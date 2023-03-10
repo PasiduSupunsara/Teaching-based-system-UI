@@ -13,23 +13,24 @@ const { Search } = Input;
 const columns = [
   {
     title: "Course",
-    dataIndex: "Course",
+    dataIndex: "cid",
     key: "Course",
   },
   {
     title: "DueDate",
-    dataIndex: "DueDate",
+    dataIndex: "duedate",
     key: "DueDate",
   },
   {
     title: "Assesment",
-    dataIndex: "Assesment",
+    dataIndex: "details",
     key: "Assesment",
   },
 ];
 
 export const Student = () => {
   const [courses, setCourses] = useState([]);
+  const [tiemLine, setTiemLine] = useState([]);
   const [coursesId, setCoursesId] = useState([]);
   const [mode,setMode] = useState("Enrolled Courses")
   const [count,setCount]= useState(0);
@@ -51,8 +52,19 @@ export const Student = () => {
       setCoursesId(result)
       setCount(count + 1)
       }) 
+      fetch("http://localhost:8080/student/getTimeLine",{
+        method:"POST",
+        headers:{"Content-Type":"application/json",
+        "Authorization":token
+          },
+          body:JSON.stringify(sid)
+      })
+      .then(res=>res.json())
+      .then((result)=>{
+        setTiemLine(result)
+      }
+      )  
   },[count]);
-
 
   const onChange = (value) => {
     if(value === "Enrolled Course"){
@@ -87,11 +99,17 @@ export const Student = () => {
       <Layout.Content>
         <div style={{ padding: "50px" }}>
         <div><h1 className="heading">Time Line</h1></div>
+        {
+          (tiemLine.length !== 0)?
           <Table
             style={{ borderBlockEndWidth: "5px", marginTop: 50 }}
-            dataSource={""}
+            dataSource={tiemLine}
             columns={columns}
           />
+          :
+          <h4 className="subDetails">There are no submission within this week</h4>
+        }
+          
         </div>
       </Layout.Content>
       <div>

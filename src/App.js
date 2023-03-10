@@ -14,6 +14,8 @@ import {GetCourseById} from './Components/GetCoureseById';
 import { CourseDetails } from './Components/CourseDetails';
 import { UserDetails } from './Components/UserDetails';
 import {Submission} from './Components/Submission';
+import {Message} from './Components/Message'
+import {SeeNotification} from './Components/SeeNotification'
 
 function App(){
   return (  
@@ -33,6 +35,8 @@ function App(){
       <Route path="/CourseDetails" element={<CourseDetails/>}/>
       <Route path="/UserDetails" element={<UserDetails/>}/>
       <Route path='/Submission' element={<Submission/>}/>
+      <Route path="/message" element={<Message/>}/>
+      <Route path="/SeeNotification" element={<SeeNotification/>}/>
       </Routes>
       </BrowserRouter>
     </div> 
