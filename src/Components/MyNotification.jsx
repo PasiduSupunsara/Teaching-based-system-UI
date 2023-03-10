@@ -9,7 +9,20 @@ export function MyNotification() {
   let tokenJson = JSON.parse(localStorage.getItem('login'));
   const navigate = useNavigate();
   useEffect(()=>{
-       
+    let token = "Bearer "+ tokenJson.accessToken;
+    let id = tokenJson.id;
+    const messages = {id}
+     fetch('http://localhost:8080/countMessages',{
+         method:"POST",
+         headers:{"Content-Type":"application/json",
+         "Authorization":token
+        },
+         body:JSON.stringify(messages)
+       }).then((response)=>
+       response.json())
+       .then((result)=>{
+       setNotificationCount(result);
+   })
   },[notificationCount]);
 
   function handle(){
@@ -22,11 +35,6 @@ export function MyNotification() {
         <BellOutlined className='notificationbell' onClick={handle}/>
       </Badge>
       :
-      <BellOutlined className='notificationbell' onClick={handle}/>
-
-    
+      <BellOutlined className='notificationbell' onClick={handle}/> 
   )
-    
-    
-  
 }

@@ -17,12 +17,10 @@ export const UserProfile = () => {
     }
     function print(){
         if(state===true){
-            console.log(state)
             setState(false)
 
         }
         if(state===false){
-            console.log(state)
             setState(true)
         }
         
