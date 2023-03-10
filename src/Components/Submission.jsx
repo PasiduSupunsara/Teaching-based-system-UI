@@ -1,9 +1,19 @@
-import {Card,Form, Input} from 'antd'
+import {Button, Card,Form, Input} from 'antd'
+import { useState } from 'react';
 
 export function Submission(props){
     let tokenJson = JSON.parse(localStorage.getItem('login'));
+    const[selectedFile,setSelectedFile]= useState(null)
+    const handleFileInputChange = (event) => {
+        setSelectedFile(event.target.files[0]);
+        
+      };
 
-    
+      const handleSubmit = (event) => {
+        const formData = new FormData();
+        formData.append("file", selectedFile);
+        console.log(selectedFile)
+      }
     return(
         <Card className="submission-card">
             <div className='submissionContainer-card'>
@@ -18,8 +28,10 @@ export function Submission(props){
                    <Form rules={[{
                     required:true,
                     message:"please enter your username"
-                    }]}label="Username" name={"my username"}></Form>
-                   <Input className='fileSubmission' type="file" />
+                    }]}label="Username" name={"my username"}
+                    ></Form>
+                   <Input className='fileSubmission' type="file" onChange={handleFileInputChange}/>
+                   <Button onClick={handleSubmit}>Submit</Button>
                    </>
                    :
                    <></>
