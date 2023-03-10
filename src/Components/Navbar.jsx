@@ -5,7 +5,6 @@ import {UserProfile} from './UserProfile'
 
 export const Navbar = () => {
     const user = JSON.parse(localStorage.getItem('username'));
-   
     return(
         <nav className="navbar">
             <text className="notification">LEARNING MANAGEMENT SYSTEM</text>
@@ -17,7 +16,14 @@ export const Navbar = () => {
                     user?
                     <>
                     <Link to="/Dashboard"className="link">Dashboard</Link>
-                    <MyNotification />
+                    {
+                        (window.location.pathname === "/" || window.location.pathname==="/Home" || 
+                        window.location.pathname==="/About" || window.location.pathname==="/Register")?
+                        null
+                        :
+                        <MyNotification />
+                    }
+                    
                     </>
                     :
                     <><Link to="/"className="link">Login</Link>
