@@ -7,7 +7,6 @@ import { useNavigate} from "react-router-dom";
 
 
 const columns = [
-
   {
     title: "First Name",
     dataIndex: "firstName",
@@ -61,7 +60,7 @@ export const Admin = () => {
   const [admin, setAdmin] = useState([]);
   const [users, setUsers] = useState([]);
   const[message,setmessage] = useState(null);
-  const [selected, setSelected] = useState(null);
+  const [selected, setSelected] = useState("users");
   const [role,setRole] = useState(null);
   let tokenJson = JSON.parse(localStorage.getItem('login'));
   const navigate = useNavigate();
@@ -146,6 +145,7 @@ export const Admin = () => {
       .then(res=>res.json())
       .then((result)=>{
       setUsers(result);
+      setRole("USERS")
       }
       ) 
     setSelected("users");
@@ -231,7 +231,12 @@ export const Admin = () => {
             </Button>
           </Link>
           </div>
-          <h2 style={{ color: "#591E66" }}>{tableTitle}</h2>
+          {
+            (role === null)?
+            null
+            :
+            <div>
+              <h2 style={{ color: "#591E66" }}>{tableTitle}</h2>
           <div>
           <Table dataSource={dataSource} columns={columns} pagination={{pageSize:10,}} onRow={(record) => {
               return {
@@ -239,19 +244,19 @@ export const Admin = () => {
               };
             }}/>
           </div>
-          <div>
-               <Form className="loginForm" form={form} onFinish={handleSubmit}>
-               <Typography.Title>Send Message</Typography.Title>
-                    <Form.Item rules={[{
-                        required:true,
-                        message:"please enter your username"
-                    }]}label="Username" name={"my username"}>
-                        <Input value = {message} onChange={(e) => setmessage(e.target.value)} placeholder="Enter your message"/>
-                    </Form.Item>
-                    <Button type="primary" htmlType="submit" block >Send</Button>
-                    <Button type="primary" onClick={()=>navigate("/Dashboard")}>Back</Button>
-               </Form>
+              <Form className="loginForm" form={form} onFinish={handleSubmit}>
+              <Typography.Title>Send Message</Typography.Title>
+                  <Form.Item rules={[{
+                      required:true,
+                      message:"please enter your message"
+                  }]}label="message" name={"my message"}>
+                      <Input value = {message} onChange={(e) => setmessage(e.target.value)} placeholder="Enter your message"/>
+                  </Form.Item>
+                  <Button type="primary" htmlType="submit" block >Send</Button>
+                  <Button type="primary" onClick={()=>navigate("/Dashboard")}>Back</Button>
+              </Form>
             </div>
+          }
       </Layout.Content>
     </Layout>
     </div>

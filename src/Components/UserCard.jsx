@@ -6,9 +6,8 @@ export function UserCard(props){
     let tokenJson = JSON.parse(localStorage.getItem('login'));
     <h1>{tokenJson.role}</h1> 
     let navigate=useNavigate();
-    console.log(props)
     function putMessage() {
-        navigate("/message" ,{state: {sid:tokenJson.id,name:props.name}})
+        navigate("/message" ,{state: {sid:tokenJson.id,name:props.name,cid:"0",state:"0"}})
     }
     
     return(
