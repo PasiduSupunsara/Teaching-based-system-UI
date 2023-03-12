@@ -7,6 +7,11 @@ export function MessageCard(props){
     let tokenJson = JSON.parse(localStorage.getItem('login'));
     let mid = props.mid;
 
+    const style = {
+        width: 1700,
+        wordWrap: 'break-word',
+      };
+
     const handleCheckboxChange = () => {
         if(state=== false){
             setCount(0)
@@ -57,11 +62,12 @@ export function MessageCard(props){
     return(
         <Card className="MessageCard">
             <div >
-                <h1>{props.sid}</h1>
-                <h1>{props.message} </h1>
-                <h1>{props.mid} </h1>
-                <Checkbox checked={state} onChange={handleCheckboxChange}>Read</Checkbox>
-                
+                <h1>From : {props.sname}</h1>
+                <h1>Message:</h1>
+                <div className="messagepragraph">
+                    <p style={style} >{props.message } </p>
+                </div>
+                <Checkbox checked={state} onChange={handleCheckboxChange}>Read</Checkbox> 
             </div> 
         </Card>
     )

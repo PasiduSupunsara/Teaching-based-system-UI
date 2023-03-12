@@ -33,7 +33,7 @@ export const SeeNotification = () => {
           </Layout.Header>
           <Layout.Content>
             {
-              <>{messages.map((message) => <MessageCard message={message.message} mid={message.mid} sid={message.sid}
+              <>{messages.map((message) => <MessageCard message={message.message} mid={message.mid} sname={message.sname}
               />)}
               </>
             }
