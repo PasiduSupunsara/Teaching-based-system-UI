@@ -146,26 +146,34 @@ export function CourseDetails(){
               <CourseCard name={location.state.coursename} id={location.state.courseid} details={location.state.details}
               duration={location.state.duration} fee={location.state.fee} startdate={location.state.startdate}
               medium={location.state.medium} enroll={location.state.enroll}/>
+            
             {
-              ((tokenJson.role === "STUDENT" || tokenJson.role === "TEACHER") && location.state.enroll === "Unenroll")?
+              ((new Date(location.state.startdate) - new Date() ) < 0 )?
               <>
-              <h1 className="coursedetailsheader">------------ASSESMENT------------</h1>
-              {
-                (numberAss === 0)?
-                <>{assesment.map((asses) => <Submission Details={asses.details} AssesmentName={asses.assesmentname}/>)}</>
-                :
-                <h4 className="subDetails">There is not assesment yet</h4>
+                {
+                  ((tokenJson.role === "STUDENT" || tokenJson.role === "TEACHER") && location.state.enroll === "Unenroll")?
+                  <>
+                  <h1 className="coursedetailsheader">------------ASSESMENT------------</h1>
+                  {
+                    (numberAss === 0)?
+                    <>{assesment.map((asses) => <Submission Details={asses.details} AssesmentName={asses.assesmentname}/>)}</>
+                    :
+                    <h4 className="subDetails">There is not assesment yet</h4>
 
-              }
-              </>
-              :
-              null
-            }
-            {
-              ((tokenJson.role === "TEACHER")&& location.state.enroll === "Unenroll")?
-              <>
-              <h1 className="coursedetailsheader">------------CREATE NEW ASSESMENT------------</h1>
-              <CreateAssesment cid={location.state.courseid} onClick={statecount} count={count}/>
+                  }
+                  </>
+                  :
+                  null
+                }
+                {
+                  ((tokenJson.role === "TEACHER")&& location.state.enroll === "Unenroll")?
+                  <>
+                  <h1 className="coursedetailsheader">------------CREATE NEW ASSESMENT------------</h1>
+                  <CreateAssesment cid={location.state.courseid} onClick={statecount} count={count}/>
+                  </>
+                  :
+                  null
+                }
               </>
               :
               null
