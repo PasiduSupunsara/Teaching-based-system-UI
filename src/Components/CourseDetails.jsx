@@ -8,6 +8,7 @@ import {DownOutlined, UpOutlined} from '@ant-design/icons';
 import { CourseCard } from "./CourseCard";
 
 
+
 const columns = [
     {
       title: "First Name",
@@ -156,7 +157,7 @@ export function CourseDetails(){
                   <h1 className="coursedetailsheader">------------ASSESMENT------------</h1>
                   {
                     (numberAss === 0)?
-                    <>{assesment.map((asses) => <Submission Details={asses.details} AssesmentName={asses.assesmentname}/>)}</>
+                    <>{assesment.map((asses) => <Submission Details={asses.details} AssesmentName={asses.assesmentname} AssesmentId={asses.assid} cid={location.state.courseid}/>)}</>
                     :
                     <h4 className="subDetails">There is not assesment yet</h4>
 
@@ -210,7 +211,9 @@ export function CourseDetails(){
                 null
             }
             <Button onClick={handleSbmit}>Back</Button>
+            
             </div>
+            
       </Layout.Content>
     </Layout> 
     )

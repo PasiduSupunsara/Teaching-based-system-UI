@@ -3,12 +3,12 @@ import { useNavigate } from "react-router-dom"
 import { Button, Form, Input, message, Typography ,Layout} from "antd";
 import { Navbar } from "./Navbar";
 
+
 export const Login = (props) => {
     const [name,setUserName] = useState('');
     const [password,setPassword] = useState('');
     let navigate=useNavigate();
     const [form] = Form.useForm();
-    
 
     const handleSubmit = (e) =>{
        const user = {name,password}
@@ -33,8 +33,16 @@ export const Login = (props) => {
                   })
                 
               }
-              if (response.status === 401){
+              else if (response.status === 401){
                 message.error("Please Try again with correct username and password")
+              } 
+              else if (response.status === 403){
+                console.log("jwt")
+                navigate("/")
+              }  
+              else if (response.status === 303){
+                message.error("User already logged")
+                navigate("/")
               }  
           })
         }

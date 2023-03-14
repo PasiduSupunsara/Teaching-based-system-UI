@@ -214,6 +214,16 @@ button {
   background-color: #f5d4f5;
   border-color: black;
 }
+.documentCard{
+  margin: 50px;
+  font-size: larger;
+  width: auto;
+  height: auto;
+  margin-right: 100px;
+  border-radius: 100;
+  background-color: #f5fae3;
+  border-color: black;
+}
 .notification{
   margin-top: 10px;
   margin-left: 10px;
@@ -270,5 +280,27 @@ button {
 .messagepragraph{
   background-color: #fcfcfc;
 }
+.messageForm{
+  background-color: rgba(74, 209, 33,0.3);
+  box-shadow: 0px 8px 32px 0 rgba(230, 230, 235, 0.3);
+  backdrop-filter: blur(1px);
+  padding: 0px 16px 16px 16px;
+  border-radius: 16px;
+  height: 700px;
+  width: 1000px;
+}
 
+.messagesbut{
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+}
+
+#messageinput {
+  width: 2%;
+  height: 400px;
+  width: 800px;
+  word-wrap: break-word;
+  
+}
 

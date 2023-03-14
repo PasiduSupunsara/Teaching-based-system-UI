@@ -96,14 +96,25 @@ export const Admin = () => {
         method:"GET",
         headers:{"Authorization":token
           },
-      })
-      .then(res=>res.json())
-      .then((result)=>{
-      setStudents(result);
-      setRole("STUDENT")
-      }
-      )
-    setSelected("students");
+      }).then((response)=>{
+        if (response.status === 200){
+          response.json().then((result) => {
+              setStudents(result);
+              setRole("STUDENT");
+            })
+            setSelected("students");
+          
+        }
+        else if (response.status === 401){
+          navigate("/")
+        } 
+        else if (response.status === 403){
+          navigate("/")
+        }  
+        else if (response.status === 303){
+          navigate("/")
+        }  
+    })
   };
 
   const handleTeacherButtonClick = () => {
@@ -112,13 +123,25 @@ export const Admin = () => {
         headers:{"Authorization":token
           },
       })
-      .then(res=>res.json())
-      .then((result)=>{
-      setTeachers(result);
-      setRole("TEACHER")
-      }
-      )
-    setSelected("teachers");
+      .then((response)=>{
+        if (response.status === 200){
+          response.json().then((result) => {
+              setTeachers(result);
+              setRole("TEACHER");
+            })
+            setSelected("teachers");
+          
+        }
+        else if (response.status === 401){
+          navigate("/")
+        } 
+        else if (response.status === 403){
+          navigate("/")
+        }  
+        else if (response.status === 303){
+          navigate("/")
+        }  
+    })
   };
 
   const handleManagerButtonClick = () => {
@@ -127,13 +150,25 @@ export const Admin = () => {
         headers:{"Authorization":token
           },
       })
-      .then(res=>res.json())
-      .then((result)=>{
-      setAdmin(result);
-      setRole("ADMIN")
-      }
-      )   
-    setSelected("admin");
+      .then((response)=>{
+        if (response.status === 200){
+          response.json().then((result) => {
+              setAdmin(result);
+              setRole("ADMIN");
+            })
+            setSelected("admin");
+          
+        }
+        else if (response.status === 401){
+          navigate("/")
+        } 
+        else if (response.status === 403){
+          navigate("/")
+        }  
+        else if (response.status === 303){
+          navigate("/")
+        }  
+    })
   };
 
   const handleUserButtonClick = () => {
@@ -142,13 +177,25 @@ export const Admin = () => {
         headers:{"Authorization":token
           },
       })
-      .then(res=>res.json())
-      .then((result)=>{
-      setUsers(result);
-      setRole("USERS")
-      }
-      ) 
-    setSelected("users");
+      .then((response)=>{
+        if (response.status === 200){
+          response.json().then((result) => {
+              setUsers(result);
+              setRole("USERS");
+            })
+            setSelected("users");
+          
+        }
+        else if (response.status === 401){
+          navigate("/")
+        } 
+        else if (response.status === 403){
+          navigate("/")
+        }  
+        else if (response.status === 303){
+          navigate("/")
+        }  
+    })
   };
 
   let dataSource;
@@ -220,16 +267,7 @@ export const Admin = () => {
             </Button>
           </Link>
 
-          <Link to="/Update">
-            <Button className="home-button" type="primary" size="large">
-              <i>Update Role</i>
-            </Button>
-          </Link>
-          <Link to="/Delete">
-            <Button className="home-button" type="primary" size="large">
-              <i>Delete User</i>
-            </Button>
-          </Link>
+         
           </div>
           {
             (role === null)?

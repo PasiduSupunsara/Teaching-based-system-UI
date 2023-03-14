@@ -17,6 +17,7 @@ export const Message = () => {
     let navigate=useNavigate();
     let tokenJson = JSON.parse(localStorage.getItem('login'));
 
+
     const handleSubmit = () =>{
         let token = "Bearer "+ tokenJson.accessToken;
         form.resetFields();
@@ -78,9 +79,7 @@ export const Message = () => {
                 body:JSON.stringify(messages)
               })
           }
-          
-        }
-          
+        }  
       }
 
         const onChange = (value) => {
@@ -94,14 +93,15 @@ export const Message = () => {
           </Layout.Header>
           <Layout.Content>
           <div className="appLog">
-               <Form className="loginForm" form={form} onFinish={handleSubmit}>
+               <Form className="messageForm" form={form} onFinish={handleSubmit}>
                <Typography.Title>Send Message</Typography.Title>
                     <Form.Item rules={[{
                         required:true,
                         message:"please enter your message"
                     }]}label="message" name={"my message"}>
-                        <Input value = {message} onChange={(e) => setmessage(e.target.value)} placeholder="Enter your message"/>
+                        <Input id="messageinput" value = {message} onChange={(e) => setmessage(e.target.value)} placeholder="Enter your message" />
                     </Form.Item>
+                    
                     {
                       (tokenJson.role === "ADMIN" && location.state.state!=="0")?
                         <Select
@@ -129,8 +129,12 @@ export const Message = () => {
                         :
                         null
                     }
-                    <Button type="primary" htmlType="submit" block >Send</Button>
+                    <div className="messagesbut">
+                    <br/>
+                    <Button type="primary" htmlType="submit" >Send</Button>
+                    <br/>
                     <Button type="primary" onClick={()=>navigate("/Dashboard")}>Back</Button>
+                    </div>
                </Form>
             </div>
           </Layout.Content>

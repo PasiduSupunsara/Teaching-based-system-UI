@@ -1,19 +1,43 @@
 import {Button, Card,Form, Input} from 'antd'
 import { useState } from 'react';
+import { useNavigate} from "react-router-dom";
+
 
 export function Submission(props){
     let tokenJson = JSON.parse(localStorage.getItem('login'));
-    const[selectedFile,setSelectedFile]= useState(null)
+    const [file, setFile] = useState(null);
+    const navigate = useNavigate(); 
     const handleFileInputChange = (event) => {
-        setSelectedFile(event.target.files[0]);
-        
-      };
+    const selectedFile = event.target.files[0];
+    setFile(selectedFile);
+   };
 
-      const handleSubmit = (event) => {
-        const formData = new FormData();
-        formData.append("file", selectedFile);
-        console.log(selectedFile)
-      }
+  function goSubmission(){
+    navigate("/AssSubmissions",{state: {assid:props.AssesmentId,cid:props.cid }})
+  }
+
+  const handleSubmit = (event) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append('sid', tokenJson.id);
+    formData.append('assid', props.AssesmentId);
+    formData.append('cid', props.cid);
+    let token = "Bearer "+ tokenJson.accessToken;
+    console.log(formData);
+    fetch('http://localhost:8080/upload', {
+        method: 'POST',
+        headers:{"Authorization":token },
+        body: formData
+      })
+      .then(response => {
+        if (response.ok) {
+          console.log('File uploaded successfully');
+        } else {
+          console.error('File upload failed');
+        }
+    })  
+  };
+
     return(
         <Card className="submission-card">
             <div className='submissionContainer-card'>
@@ -35,7 +59,14 @@ export function Submission(props){
                    </>
                    :
                    <></>
-                }            
+                } 
+                {
+                  (tokenJson.role==="TEACHER")?
+                  <Button onClick={goSubmission}>Go Submissions</Button> 
+                  :
+                  null
+                }
+                       
             </div> 
         </Card>
     )
