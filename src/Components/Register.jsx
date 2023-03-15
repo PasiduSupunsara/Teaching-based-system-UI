@@ -15,6 +15,15 @@ export const Register = (props) => {
     const [dateOfBirth, setDateOfBirth] = useState(null);
     const [idNumber, setIdNumber] = useState(null);
     const [form] = Form.useForm();
+    const minDate = new Date();
+    minDate.setFullYear(minDate.getFullYear() - 100); 
+    const mindate = minDate.toISOString().substr(0, 10); 
+
+    const maxDate = new Date();
+    maxDate.setFullYear(maxDate.getFullYear() - 10); 
+    const maxdate = maxDate.toISOString().substr(0, 10); 
+
+
 
     let navigate=useNavigate();
 
@@ -139,7 +148,8 @@ export const Register = (props) => {
                     message:"please enter your Birthday"
                 }]}label="Birthday" name={"my Birthday"}>
                     
-                    <Input type="date" value = {dateOfBirth} onChange={(e) => setDateOfBirth(e.target.value)} placeholder="yyyy/mm/dd"/>
+                    <Input type="date" value = {dateOfBirth} onChange={(e) => setDateOfBirth(e.target.value)} 
+                     min={mindate} max={maxdate} placeholder="yyyy/mm/dd"/>
                     
                      
             </Form.Item> 

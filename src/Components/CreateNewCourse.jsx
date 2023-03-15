@@ -11,7 +11,9 @@ export const CreateNewCourse = (props) => {
     const [startdate,setStartdate] = useState(new Date());
     const [duration,setDuration] = useState('');
     const [fee,setFee] = useState('');
-
+    const today = new Date();
+    today.setDate(today.getDate() + 7); 
+    const minDate = today.toISOString().substr(0, 10); 
 
     let navigate=useNavigate();
     let tokenJson = JSON.parse(localStorage.getItem('login'));
@@ -81,7 +83,8 @@ export const CreateNewCourse = (props) => {
                     required:true,
                     message:"please enter startdate"
                 }]}label="startdate" name={"startdate"}>
-                    <Input type="date" value = {startdate} onChange={(e) => setStartdate(e.target.value)} placeholder="startdate"/>
+                    <Input type="date" value = {startdate} onChange={(e) => setStartdate(e.target.value)} 
+                    min={minDate} placeholder="startdate"/>
                    
                 </Form.Item>
 

@@ -67,18 +67,19 @@ export function UserCard(props){
         <Card className="UserCard">
             <div >
                <h1>{props.firstName} {props.lastName}</h1>
-
                 <h1>{props.role}</h1>
+                <h1>{props.phoneNumber}</h1>
+                <h1>{props.email}</h1>
+
                 <h1>{props.name}</h1>
                 
                 <h1>{props.birthday}</h1>
                 <h1>{props.address}</h1>
-                <h1>{props.phoneNumber}</h1>
-                <h1>{props.email}</h1>
+               
                 {
                     ((tokenJson.role=== "TEACHER")||(tokenJson.role=== "ADMIN"))?
-                    <>
-                         {<MessageOutlined onClick={putMessage}/>}
+                    <> 
+                         Use this to send message --- {<MessageOutlined onClick={putMessage}/>}
                          <br/>
                          {<DeleteOutlined  onClick={userDelete}/>}
                          <br/>

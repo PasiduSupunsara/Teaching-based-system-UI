@@ -25,7 +25,13 @@ export function CourseCard(props){
                 <h1>{props.fee}</h1>
                 <h1>{props.startdate}</h1>
                 <h1>{props.medium}</h1>
-                {<MessageOutlined onClick={putMessage}/>}
+                {
+                    (props.num === 0)?
+                    null
+                    :
+                    <>{<MessageOutlined onClick={putMessage}/>}</>
+                }
+                
             </div> 
         </Card>
     )

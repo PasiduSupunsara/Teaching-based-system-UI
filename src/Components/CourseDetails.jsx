@@ -66,6 +66,7 @@ export function CourseDetails(){
     const[student, setStudent] = useState([]);
     const[assesment,setAssesment] = useState([]);
     const[showStudent,setShowStudent]=useState("Show Students");
+    const numStudent = student.length;
     const handleSbmit = (e) =>{
         if(location.state.role === "TEACHER" || location.state.role === "ADMIN"){
             navigate("/Dashboard");
@@ -74,7 +75,6 @@ export function CourseDetails(){
             navigate("/Dashboard")
         }
     }
-
     const getStudent = (e) => {
         if(showStudent === "Show Students"){
           if(location.state.role==="TEACHER" || location.state.role==="ADMIN"){
@@ -127,6 +127,29 @@ export function CourseDetails(){
             }
             
           }) 
+
+          if(showStudent === "Show Students"){
+            if(location.state.role==="TEACHER" || location.state.role==="ADMIN"){
+              let token = "Bearer "+ tokenJson.accessToken;
+              const id = location.state.courseid;
+              const cid = {id}
+                fetch("http://localhost:8080/getAllStudentForCourse",{
+                  method:"POST",
+                  headers:{"Content-Type":"application/json",
+                   "Authorization":token
+                  },
+                   body:JSON.stringify(cid)
+                })
+                .then(res=>res.json())
+                .then((result)=>{
+                  setStudent(result) 
+                }) 
+            }
+              setShowStudent("Hide Students");
+          }
+          else if(showStudent === "Hide Students"){
+              setShowStudent("Show Students");
+          }
       },[count]);
     
 
@@ -146,7 +169,7 @@ export function CourseDetails(){
       <h1 className="coursedetailsheader">------------COURSE DETAILS------------</h1>
               <CourseCard name={location.state.coursename} id={location.state.courseid} details={location.state.details}
               duration={location.state.duration} fee={location.state.fee} startdate={location.state.startdate}
-              medium={location.state.medium} enroll={location.state.enroll}/>
+              medium={location.state.medium} enroll={location.state.enroll} num={numStudent}/>
             
             {
               ((new Date(location.state.startdate) - new Date() ) < 0 )?
