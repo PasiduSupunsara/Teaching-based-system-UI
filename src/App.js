@@ -15,8 +15,18 @@ import {Submission} from './Components/Submission';
 import {Message} from './Components/Message'
 import {SeeNotification} from './Components/SeeNotification'
 import {AssSubmissions} from './Components/AssSubmissions'
+import { message } from 'antd';
 
 function App(){
+
+  message.config({
+    top: 100,
+    duration: 2,
+    maxCount: 3,
+    rtl: false,
+    getContainer: () => document.body,
+  });
+
   return (  
     <div className="App" >
       <BrowserRouter>

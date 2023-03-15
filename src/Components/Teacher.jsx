@@ -4,11 +4,10 @@ import "./Dashboard";
 import { Navbar } from "./Navbar";
 import {CardComponent} from './CardComponent'
 import {useState,useEffect} from 'react'
-import { Input, Space } from 'antd';
+import { Space } from 'antd';
 import { Select } from 'antd';
 
 
-const { Search } = Input;
 
 const columns = [
   {
@@ -115,7 +114,6 @@ export const Teacher = () => {
       <div>
       <h1 className="heading">Course Overview</h1>
         <Space className="drop" direction="vertical">
-          <Search placeholder="Filter my courses" allowClear enterButton="Search" size="middle" onSearch={onSearch}/>
         </Space>
         <br/>
         <Select

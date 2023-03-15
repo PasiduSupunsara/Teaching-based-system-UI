@@ -32,8 +32,12 @@ export const Navbar = () => {
                 }
                 
             </ul>
-            <UserProfile/>
-
+            {
+                 user?
+                 <UserProfile/>
+                 :
+                 null
+            }
         </nav>
     )
 };

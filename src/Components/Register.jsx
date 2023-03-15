@@ -66,6 +66,12 @@ export const Register = (props) => {
                 navigate("/Register");
                 console.log(user);
             }
+            else if(response.status===303){
+                message.warning("Please enter valid birthday (It should be within past 100 years and past 20 years")
+                message.warning("Shello")
+                navigate("/Register");
+                console.log(user);
+            }
 
             else{
                 message.warning("Please try with correct username and password")
@@ -94,7 +100,7 @@ export const Register = (props) => {
                     required:true,
                     message:"please enter your password"
                 }]}label="password" name={"my password"}>
-                    <Input value = {password} onChange={(e) => setPassword(e.target.value)} placeholder="Enter your password"/>
+                    <Input.Password value = {password} onChange={(e) => setPassword(e.target.value)} placeholder="Enter your password"/>
             </Form.Item>
             <Form.Item rules={[{
                     required:true,

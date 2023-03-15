@@ -87,6 +87,7 @@ export const Admin = () => {
         },
          body:JSON.stringify(messages)
        })
+       
      }
   
 
@@ -103,6 +104,7 @@ export const Admin = () => {
               setRole("STUDENT");
             })
             setSelected("students");
+            
           
         }
         else if (response.status === 401){
@@ -290,7 +292,8 @@ export const Admin = () => {
                   }]}label="message" name={"my message"}>
                       <Input value = {message} onChange={(e) => setmessage(e.target.value)} placeholder="Enter your message"/>
                   </Form.Item>
-                  <Button type="primary" htmlType="submit" block >Send</Button>
+                  <Button type="primary" htmlType="submit"  >Send</Button>
+                  <br/>
                   <Button type="primary" onClick={()=>navigate("/Dashboard")}>Back</Button>
               </Form>
             </div>

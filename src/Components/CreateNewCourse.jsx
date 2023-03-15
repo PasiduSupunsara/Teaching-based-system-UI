@@ -1,6 +1,6 @@
 import React,{useState} from "react"
 import { useNavigate } from "react-router-dom";
-import { Button, Form, Input, Typography ,Layout} from "antd";
+import { Button, Form, Input, Typography ,Layout, message} from "antd";
 import {Navbar} from './Navbar'
 
 export const CreateNewCourse = (props) => {
@@ -30,7 +30,13 @@ export const CreateNewCourse = (props) => {
         },
           body:JSON.stringify(user)
       }).then((response)=>{
-        navigate("/Dashboard")
+        if(response.status === 200){
+            navigate("/Dashboard")
+        }
+        else if(response.status === 425){
+            message.error("Please enter valid Start date(It must be atleast 7 days from today)")
+        }
+        
     })
 
     }

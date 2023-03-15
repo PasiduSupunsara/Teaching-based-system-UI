@@ -6,22 +6,23 @@ import { Button} from 'antd';
 export const UserProfile = () => {
     const user = JSON.parse(localStorage.getItem('username'));
     const tokenJson = JSON.parse(localStorage.getItem('login'));
+    let token = "Bearer "+ tokenJson.accessToken;
     let navigate=useNavigate();
+    
     const[state,setState]=useState(false);
 
 
     function logout(){
-        localStorage.clear();
-        navigate("/")
 
-     /**    const name = {user}
+        const name = user
+        const name1 = {name}
         console.log(name)
          fetch('http://localhost:8080/userlogout',{
              method:"POST",
              headers:{"Content-Type":"application/json",
              "Authorization":token
             },
-             body:JSON.stringify(name)
+             body:JSON.stringify(name1)
            }).then((response)=>{
                if (response.status === 200){
                 localStorage.clear();
@@ -31,7 +32,7 @@ export const UserProfile = () => {
                 console.log("error");
                }
                
-           })*/
+           })
     }
     function print(){
         if(state===true){
